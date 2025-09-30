@@ -1,0 +1,121 @@
+
+# MANIFEST.app.yml — Single source of truth for routes/pages/styles/components/APIs
+
+meta:
+  app_name: "Bob The Turtle: Hero Of Turtle Dungeon Depths"
+  routing: phaser3         # Game scenes managed by Phaser 3
+  styling: css-modules     # Component-scoped styling
+  canonical_source: "PROJECT_GUIDE.md §13 (Glossary & Synonyms)"
+
+scenes:
+  - id: boot
+    class: "BootScene"
+    file: "src/scenes/BootScene.ts"
+    feature: "engine"
+    purpose: "Engine initialization and configuration"
+    status: "planned"
+    
+  - id: preload
+    class: "PreloadScene"
+    file: "src/scenes/PreloadScene.ts"
+    feature: "assets"
+    purpose: "Load all game assets and show progress"
+    status: "planned"
+    
+  - id: menu
+    class: "MenuScene"
+    file: "src/scenes/MenuScene.ts"
+    feature: "navigation"
+    purpose: "Title screen, character selection, settings"
+    status: "planned"
+    
+  - id: game
+    class: "GameScene"
+    file: "src/scenes/GameScene.ts"
+    feature: "gameplay"
+    purpose: "Main dungeon exploration and combat"
+    status: "planned"
+    
+  - id: inventory
+    class: "InventoryScene"
+    file: "src/scenes/InventoryScene.ts"
+    feature: "equipment"
+    purpose: "Character stats and equipment management"
+    status: "planned"
+    
+  - id: death
+    class: "DeathScene"
+    file: "src/scenes/DeathScene.ts"
+    feature: "progression"
+    purpose: "Game over screen and meta-progression"
+    status: "planned"
+
+systems:
+  - name: "CombatSystem"
+    file: "src/systems/CombatSystem.ts"
+    feature: "combat"
+    purpose: "Handle real-time combat mechanics"
+    
+  - name: "InventorySystem"
+    file: "src/systems/InventorySystem.ts"
+    feature: "equipment"
+    purpose: "Manage equipment and stats"
+    
+  - name: "ProgressionSystem"
+    file: "src/systems/ProgressionSystem.ts"
+    feature: "progression"
+    purpose: "XP, levels, skill trees"
+    
+  - name: "DungeonGenerator"
+    file: "src/systems/DungeonGenerator.ts"
+    feature: "procedural"
+    purpose: "Generate dungeon floors and layouts"
+    
+  - name: "SaveSystem"
+    file: "src/systems/SaveSystem.ts"
+    feature: "persistence"
+    purpose: "Handle save/load and validation"
+    
+  - name: "AudioSystem"
+    file: "src/systems/AudioSystem.ts"
+    feature: "audio"
+    purpose: "Manage music and SFX"
+    
+  - name: "PerformanceSystem"
+    file: "src/systems/PerformanceSystem.ts"
+    feature: "optimization"
+    purpose: "Memory management and texture atlasing"
+
+assets:
+  music:
+    - path: "public/assets/music/"
+      files: "1.mp3 through 28.mp3"
+      purpose: "Adaptive background music system"
+      
+  sfx:
+    - path: "public/assets/sfx/"
+      files: "achievement_unlock.ogg, level_up.ogg, sword_hit.ogg"
+      purpose: "Game sound effects"
+      
+  sprites:
+    - path: "public/assets/sprites/"
+      purpose: "64x64 pixel art characters, enemies, items"
+      format: "Texture atlases for performance"
+      
+  ui:
+    - path: "public/assets/ui/"
+      purpose: "HUD elements, menus, inventory screens"
+
+styles:
+  global: "src/styles/globals.css"
+  game: "src/styles/game.css"
+  ui: "src/styles/ui.css"
+
+conventions:
+  scenes: "PascalCase class names, kebab-case files"
+  systems: "PascalCase class names, camelCase methods"
+  files_game: "kebab-case directories; system files in feature subfolder"
+  assets: "kebab-case filenames, organized by type"
+  performance: "Texture atlases required for sprites"
+  mobile_first: "Touch controls and responsive scaling"
+

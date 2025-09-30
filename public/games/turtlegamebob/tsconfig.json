@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": []
+  },
+  "include": ["src/legendary-game.ts", "src/main.ts"],
+  "exclude": [
+    "src/scenes-clean",
+    "src/main-clean.ts",
+    "src/main-complete.ts",
+    "src/main-final.ts",
+    "src/pixellab-legendary.ts",
+    "src/ecs",
+    "src/roguelike",
+    "src/dungeon",
+    "src/systems",
+    "src/ui/RexUIManager.ts"
+  ]
+}
+
+

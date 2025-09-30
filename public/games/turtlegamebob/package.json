@@ -1,0 +1,32 @@
+{
+  "name": "bob-turtle-roguelike",
+  "version": "1.0.0",
+  "description": "Bob The Turtle: Hero Of Turtle Dungeon Depths - A roguelike adventure game",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.28.4"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.1"
+  },
+  "keywords": [
+    "game",
+    "roguelike",
+    "phaser",
+    "turtle",
+    "dungeon",
+    "adventure"
+  ],
+  "author": "David",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uncmatteth/bobdungeon-legendary.git"
+  }
+}

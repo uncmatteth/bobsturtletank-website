@@ -1,0 +1,50 @@
+EXAMPLE_CONTENT: REMOVE_BEFORE_CODING
+# MANIFEST.app.yml — Single source of truth for routes/pages/styles/components/APIs
+
+meta:
+  app_name: [FILL IN]
+  routing: react-router    # or nextjs | vue-router | flask | fastapi
+  styling: tailwind        # or css-modules | styled-components
+  canonical_source: "PROJECT_GUIDE.md §13 (Glossary & Synonyms)"
+
+pages:
+  # 🔴 EXAMPLE ROW — replace or delete
+  - id: home
+    route: "/"
+    component: "HomePage"
+    file: "src/pages/home/HomePage.tsx"
+    style:
+      approach: "tailwind"
+      files: []
+    feature: "home"
+    seo:
+      title: "Home"
+      description: "Landing"
+    status: "exists"       # planned | exists | deprecated
+
+components:
+  # 🔴 EXAMPLE ROW
+  - name: "LeaderboardTable"
+    file: "src/components/leaderboards/LeaderboardTable.tsx"
+    feature: "leaderboards"
+    used_by: ["LeaderboardsPage"]
+
+api:
+  # 🔴 EXAMPLE ROW
+  - name: "GET /api/leaderboards"
+    file: "app/routes/leaderboards.py"
+    handler: "get_leaderboards"
+    model_in: null
+    model_out: "LeaderboardDTO"
+    status: "planned"
+
+styles:
+  global: "src/styles/globals.css"
+  design_tokens: "src/styles/tokens.css"
+
+conventions:
+  urls: "kebab-case, pluralized per Glossary"
+  components: "PascalCase default export matches 'component' field"
+  files_frontend: "kebab-case directories; component file in feature subfolder"
+  one_style_per_page: true
+

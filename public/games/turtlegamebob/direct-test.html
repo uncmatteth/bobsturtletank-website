@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob The Turtle - Direct Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bob The Turtle: Hero Of Turtle Dungeon Depths</h1>
+    <p>Click the button below to start the game directly:</p>
+    <a href="http://localhost:5178" class="button" target="_blank">Launch Game</a>
+    <p>If the game doesn't load, make sure the development server is running.</p>
+    <p>Current server URL: <span id="server-url">http://localhost:5178</span></p>
+    
+    <script>
+        // Check if the server is running
+        fetch('http://localhost:5178')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('server-url').style.color = '#4CAF50';
+                    document.getElementById('server-url').textContent += ' (Online)';
+                }
+            })
+            .catch(error => {
+                document.getElementById('server-url').style.color = 'red';
+                document.getElementById('server-url').textContent += ' (Offline)';
+            });
+    </script>
+</body>
+</html>
+
+
+
+
+
