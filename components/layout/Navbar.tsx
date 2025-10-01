@@ -11,6 +11,7 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/games", label: "Games" },
   { href: "/book", label: "Book" },
+  { href: "/lore", label: "Lore" },
   { href: "/book/characters", label: "Characters" },
   { href: "/book/trivia", label: "Trivia" },
   { href: "/about", label: "About" },
