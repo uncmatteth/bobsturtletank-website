@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   keywords: ["Bob the Turtle", "fantasy adventure", "browser games", "interactive fiction", "Uncle Matt", "turtle tank", "roguelike", "trivia game"],
   authors: [{ name: "Uncle Matt" }],
   creator: "Uncle Matt",
+  icons: {
+    icon: '/bob-icon.png',
+    apple: '/bob-icon.png',
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
