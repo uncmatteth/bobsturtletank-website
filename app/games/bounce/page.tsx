@@ -8,7 +8,7 @@ import { ArrowLeft, Home } from "lucide-react";
 export default function TurtleBouncePage() {
   useEffect(() => {
     // Redirect to the actual game
-    window.location.href = "/games/turtlebouncybounce/index.html";
+    window.location.href = "/games/turtlebounceybounce/index.html";
   }, []);
 
   return (

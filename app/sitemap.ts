@@ -1,5 +1,4 @@
 import { MetadataRoute } from 'next';
-import { getAllChapters } from '@/lib/data/chapters';
 import { getAllCharacters } from '@/lib/data/characters';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -14,25 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/games/roguelike',
     '/games/leaderboard',
     '/book',
+    '/book/buy',
     '/book/characters',
     '/book/artifacts',
     '/book/locations',
-    '/book/chapters',
     '/book/trivia',
   ].map(route => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
     priority: route === '' ? 1 : 0.8,
-  }));
-
-  // Chapter pages
-  const chapters = getAllChapters();
-  const chapterPages = chapters.map(chapter => ({
-    url: `${baseUrl}/book/chapters/${chapter.number}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
   }));
 
   // Character detail pages
@@ -44,5 +34,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...chapterPages, ...characterPages];
+  return [...staticPages, ...characterPages];
 }

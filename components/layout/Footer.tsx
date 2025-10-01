@@ -44,8 +44,8 @@ export function Footer() {
             <h3 className="font-semibold mb-3">Book Content</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/book/chapters" className="text-muted-foreground hover:text-foreground transition-colors">
-                  All Chapters
+                <Link href="/book/buy" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Buy the Book
                 </Link>
               </li>
               <li>

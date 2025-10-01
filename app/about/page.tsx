@@ -1,7 +1,8 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Turtle, Book, Gamepad2, Users } from "lucide-react";
+import { Turtle, Book, Gamepad2, Users, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { BobGallery } from "@/components/gallery/BobGallery";
 
 export const metadata = {
   title: "About Bob's Tank",
@@ -116,12 +117,24 @@ export default function AboutPage() {
 
         <Card>
           <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Camera className="h-6 w-6" />
+              Bob's Photo Gallery
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <BobGallery />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
             <CardTitle>Explore the Universe</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid md:grid-cols-2 gap-4">
               <Button asChild variant="outline">
-                <Link href="/book/chapters">Read All 69 Chapters</Link>
+                <Link href="/book/buy">Buy the Book (69 Chapters)</Link>
               </Button>
               <Button asChild variant="outline">
                 <Link href="/book/characters">Browse Characters</Link>

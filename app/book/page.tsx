@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { getAllCharacters } from "@/lib/data/characters";
 import { getAllArtifacts } from "@/lib/data/artifacts";
 import { getAllLocations } from "@/lib/data/locations";
-import { getAllChapters } from "@/lib/data/chapters";
 import { Book, Users, Sparkles, MapPin, Trophy } from "lucide-react";
 
 export const metadata = {
@@ -16,7 +15,6 @@ export default function BookPage() {
   const charactersCount = getAllCharacters().length;
   const artifactsCount = getAllArtifacts().length;
   const locationsCount = getAllLocations().length;
-  const chaptersCount = getAllChapters().length;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -25,27 +23,27 @@ export default function BookPage() {
           Bob's Adventure Realm Encyclopedia
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-          Dive deep into the {chaptersCount}-chapter epic journey of Bob the Magical Talking Turtle and Uncle Matt.
+          Dive deep into the 69-chapter epic journey of Bob the Magical Talking Turtle and Uncle Matt.
           Explore characters, magical artifacts, legendary locations, and test your knowledge!
         </p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Chapters */}
+        {/* Buy the Book */}
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <div className="flex items-center gap-2 text-ocean-blue-600">
               <Book className="h-6 w-6" />
-              <CardTitle>Chapters</CardTitle>
+              <CardTitle>The Complete Book</CardTitle>
             </div>
-            <CardDescription>{chaptersCount} epic chapters</CardDescription>
+            <CardDescription>69 epic chapters available now!</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Read the complete adventure from Cedar Hollow to the cosmic void and beyond!
+              Experience the complete adventure from Cedar Hollow to the cosmic void and beyond!
             </p>
             <Button asChild className="w-full">
-              <Link href="/book/chapters">Read Chapters</Link>
+              <Link href="/book/buy">Buy the Book</Link>
             </Button>
           </CardContent>
         </Card>

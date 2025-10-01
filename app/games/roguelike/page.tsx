@@ -7,7 +7,7 @@ import { ArrowLeft, Home } from "lucide-react";
 
 export default function TurtleRoguelikePage() {
   useEffect(() => {
-    // Redirect to the actual game
+    // Redirect to the actual game  
     window.location.href = "/games/turtlegamebob/index.html";
   }, []);
 

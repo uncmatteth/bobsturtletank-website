@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Gamepad2, Book, Trophy, Sparkles } from "lucide-react";
+import { Gamepad2, Book, Trophy, Sparkles, Camera } from "lucide-react";
+import { BobGallery } from "@/components/gallery/BobGallery";
 
 export default function HomePage() {
   return (
@@ -60,24 +61,24 @@ export default function HomePage() {
           </CardFooter>
         </Card>
 
-        {/* Latest Chapter */}
+        {/* Buy the Book */}
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <div className="flex items-center gap-2 text-ocean-blue-600">
               <Book className="h-6 w-6" />
-              <CardTitle>Latest Chapter</CardTitle>
+              <CardTitle>The Complete Book</CardTitle>
             </div>
-            <CardDescription>Continue the adventure</CardDescription>
+            <CardDescription>69 epic chapters</CardDescription>
           </CardHeader>
           <CardContent>
-            <h3 className="font-semibold text-lg mb-2">Chapter 69: A Beckoning Signal Through the Stars</h3>
+            <h3 className="font-semibold text-lg mb-2">Bob's Adventure Realm - Complete Collection</h3>
             <p className="text-sm text-muted-foreground">
-              The cosmic journey continues as mysterious signals beckon from the void...
+              From Cedar Hollow to the cosmic void - experience the complete adventure!
             </p>
           </CardContent>
           <CardFooter>
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/book/chapters/69">Read Chapter</Link>
+            <Button asChild className="w-full">
+              <Link href="/book/buy">Buy Now</Link>
             </Button>
           </CardFooter>
         </Card>
@@ -103,6 +104,25 @@ export default function HomePage() {
             </Button>
           </CardFooter>
         </Card>
+      </section>
+
+      {/* Bob Photo Gallery */}
+      <section className="py-12">
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Camera className="h-8 w-8 text-turtle-green-600" />
+            <h2 className="font-serif text-3xl font-bold">Bob's Photo Gallery</h2>
+          </div>
+          <p className="text-lg text-muted-foreground">
+            Meet the real Bob the Turtle - the inspiration for this epic adventure!
+          </p>
+        </div>
+        <BobGallery limit={12} columns={6} />
+        <div className="text-center mt-6">
+          <Button asChild variant="outline">
+            <Link href="/about">View Full Gallery & Learn More</Link>
+          </Button>
+        </div>
       </section>
 
       {/* About Bob Section */}
