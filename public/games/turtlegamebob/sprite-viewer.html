@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐢 Bob's Sprite Asset Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 2px solid #0f3460;
+        }
+        
+        h1 {
+            font-size: 48px;
+            color: #00d4ff;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        
+        .controls label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: rgba(15, 52, 96, 0.5);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .controls label:hover {
+            background: rgba(15, 52, 96, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .controls input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #0f3460;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0f3460;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sprite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .sprite-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #0f3460;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .sprite-card:hover {
+            transform: scale(1.05);
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .sprite-preview {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sprite-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        
+        .sprite-name {
+            font-size: 12px;
+            color: #00d4ff;
+            word-break: break-word;
+            margin-bottom: 5px;
+        }
+        
+        .sprite-path {
+            font-size: 10px;
+            color: #888;
+            word-break: break-all;
+        }
+        
+        .sprite-size {
+            font-size: 10px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .loading {
+            text-align: center;
+            font-size: 24px;
+            padding: 50px;
+            color: #00d4ff;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .stat-box {
+            padding: 15px 25px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .delete-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background: rgba(255, 0, 0, 0.3);
+            border: 1px solid #ff0000;
+            color: #ff6b6b;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.3s;
+        }
+        
+        .delete-btn:hover {
+            background: rgba(255, 0, 0, 0.6);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            image-rendering: pixelated;
+            border: 3px solid #00d4ff;
+            border-radius: 10px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+            background: rgba(255, 0, 0, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐢 Bob's Sprite Asset Viewer</h1>
+        <p class="subtitle">Review all sprites and decide what to keep for the new roguelike</p>
+    </div>
+
+    <div class="stats" id="stats">
+        <div class="stat-box">
+            <div class="stat-number" id="total-sprites">0</div>
+            <div class="stat-label">Total Sprites</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="total-categories">0</div>
+            <div class="stat-label">Categories</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <label>
+            <input type="checkbox" id="show-characters" checked>
+            Show Characters (Green Turtle)
+        </label>
+        <label>
+            <input type="checkbox" id="show-enemies" checked>
+            Show Enemies
+        </label>
+        <label>
+            <input type="checkbox" id="show-items" checked>
+            Show Items
+        </label>
+        <label>
+            <input type="checkbox" id="show-effects" checked>
+            Show Effects
+        </label>
+        <label>
+            <input type="checkbox" id="show-environment" checked>
+            Show Environment
+        </label>
+        <label>
+            <input type="checkbox" id="show-ui" checked>
+            Show UI
+        </label>
+    </div>
+
+    <div id="content">
+        <div class="loading">🐢 Loading sprites...</div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">×</div>
+            <img id="modal-img" src="" alt="Sprite Preview">
+        </div>
+    </div>
+
+    <script>
+        // Define all sprite paths based on the asset structure
+        const assetCategories = {
+            'Green Turtle (Hero)': 'assets/extracted/green_turtle/rotations',
+            'Characters': 'assets/extracted/characters/rotations',
+            'Enemies': 'assets/extracted/enemies/rotations',
+            'Items': 'assets/extracted/items/rotations',
+            'Effects': 'assets/extracted/effects/rotations',
+            'Environment': 'assets/extracted/environment/rotations',
+            'UI': 'assets/extracted/ui/rotations',
+        };
+
+        const directions = [
+            'north', 'north-east', 'east', 'south-east',
+            'south', 'south-west', 'west', 'north-west'
+        ];
+
+        let allSprites = [];
+        let stats = {
+            total: 0,
+            categories: 0
+        };
+
+        async function loadSprites() {
+            const content = document.getElementById('content');
+            content.innerHTML = '';
+            allSprites = [];
+
+            for (const [category, basePath] of Object.entries(assetCategories)) {
+                const section = document.createElement('div');
+                section.className = 'section';
+                section.dataset.category = category.toLowerCase().replace(/\s+/g, '-');
+                
+                const title = document.createElement('h2');
+                title.className = 'section-title';
+                title.textContent = `${getCategoryIcon(category)} ${category}`;
+                section.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'sprite-grid';
+
+                // Try to load all possible directions
+                for (const direction of directions) {
+                    const imgPath = `${basePath}/${direction}.png`;
+                    
+                    // Check if image exists
+                    const exists = await checkImageExists(imgPath);
+                    if (exists) {
+                        const card = createSpriteCard(imgPath, direction, category);
+                        grid.appendChild(card);
+                        allSprites.push({ path: imgPath, category, direction });
+                    }
+                }
+
+                if (grid.children.length > 0) {
+                    section.appendChild(grid);
+                    content.appendChild(section);
+                }
+            }
+
+            updateStats();
+            attachFilters();
+        }
+
+        function createSpriteCard(path, name, category) {
+            const card = document.createElement('div');
+            card.className = 'sprite-card';
+            card.onclick = () => openModal(path);
+
+            const preview = document.createElement('div');
+            preview.className = 'sprite-preview';
+
+            const img = document.createElement('img');
+            img.src = path;
+            img.alt = name;
+            img.onerror = () => {
+                preview.innerHTML = '<div style="color: #ff6b6b;">❌ Failed to load</div>';
+            };
+            img.onload = () => {
+                const size = document.createElement('div');
+                size.className = 'sprite-size';
+                size.textContent = `${img.naturalWidth}×${img.naturalHeight}px`;
+                card.appendChild(size);
+            };
+
+            preview.appendChild(img);
+            card.appendChild(preview);
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'sprite-name';
+            nameDiv.textContent = name.toUpperCase();
+            card.appendChild(nameDiv);
+
+            const pathDiv = document.createElement('div');
+            pathDiv.className = 'sprite-path';
+            pathDiv.textContent = path;
+            card.appendChild(pathDiv);
+
+            return card;
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'Green Turtle (Hero)': '🐢',
+                'Characters': '👤',
+                'Enemies': '👹',
+                'Items': '💎',
+                'Effects': '✨',
+                'Environment': '🌳',
+                'UI': '🎮'
+            };
+            return icons[category] || '📦';
+        }
+
+        function checkImageExists(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => resolve(true);
+                img.onerror = () => resolve(false);
+                img.src = url;
+            });
+        }
+
+        function updateStats() {
+            document.getElementById('total-sprites').textContent = allSprites.length;
+            document.getElementById('total-categories').textContent = Object.keys(assetCategories).length;
+        }
+
+        function attachFilters() {
+            const filterMap = {
+                'show-characters': ['green-turtle-(hero)', 'characters'],
+                'show-enemies': ['enemies'],
+                'show-items': ['items'],
+                'show-effects': ['effects'],
+                'show-environment': ['environment'],
+                'show-ui': ['ui']
+            };
+
+            for (const [checkboxId, categories] of Object.entries(filterMap)) {
+                document.getElementById(checkboxId).addEventListener('change', (e) => {
+                    categories.forEach(cat => {
+                        const sections = document.querySelectorAll(`[data-category="${cat}"]`);
+                        sections.forEach(section => {
+                            section.classList.toggle('hidden', !e.target.checked);
+                        });
+                    });
+                });
+            }
+        }
+
+        function openModal(imgPath) {
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('modal-img');
+            modalImg.src = imgPath;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Close modal on click outside
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Load sprites on page load
+        window.addEventListener('load', loadSprites);
+    </script>
+</body>
+</html>
+
