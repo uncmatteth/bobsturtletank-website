@@ -31,7 +31,7 @@ export default function MapsPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 min-h-screen underwater-background">
       {/* Header */}
       <div className="text-center mb-16">
         <div className="inline-block mb-4 text-sm text-blue-600 dark:text-blue-300 font-medium tracking-wide">

@@ -9,12 +9,13 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Map } from "lucide-react";
 
 const filters = [
-  { label: "Villages", value: "Villages" },
-  { label: "Forests", value: "Forests" },
+  { label: "Forest", value: "Forest" },
+  { label: "Grassland", value: "Grassland" },
   { label: "Mountains", value: "Mountains" },
-  { label: "Cities", value: "Cities" },
-  { label: "Dungeons", value: "Dungeons" },
-  { label: "Realms", value: "Realms" },
+  { label: "Desert", value: "Desert" },
+  { label: "Dungeon", value: "Dungeon" },
+  { label: "City", value: "City" },
+  { label: "Cosmic", value: "Cosmic" },
 ];
 
 export default function LocationsPage() {
@@ -25,9 +26,9 @@ export default function LocationsPage() {
   const filteredLocations = useMemo(() => {
     let filtered = allLocations;
 
-    // Apply subcategory filter
+    // Apply terrain type filter
     if (activeFilter) {
-      filtered = filtered.filter(l => l.subcategory === activeFilter);
+      filtered = filtered.filter(l => l.terrainType.includes(activeFilter));
     }
 
     // Apply search query
@@ -36,49 +37,38 @@ export default function LocationsPage() {
       filtered = filtered.filter(l =>
         l.name.toLowerCase().includes(lowerQuery) ||
         l.description.toLowerCase().includes(lowerQuery) ||
-        l.notes.toLowerCase().includes(lowerQuery)
+        l.region.toLowerCase().includes(lowerQuery) ||
+        l.terrainType.toLowerCase().includes(lowerQuery)
       );
     }
 
     return filtered;
   }, [allLocations, searchQuery, activeFilter]);
 
-  const getLocationIcon = (subcategory: string) => {
-    switch (subcategory.toLowerCase()) {
-      case 'villages':
-        return '🏘️';
-      case 'forests':
-        return '🌲';
-      case 'mountains':
-        return '⛰️';
-      case 'cities':
-        return '🏙️';
-      case 'dungeons':
-        return '⚔️';
-      case 'realms':
-        return '🌌';
-      default:
-        return '📍';
-    }
+  const getLocationIcon = (terrainType: string) => {
+    const terrain = terrainType.toLowerCase();
+    if (terrain.includes('village')) return '🏘️';
+    if (terrain.includes('forest')) return '🌲';
+    if (terrain.includes('mountain')) return '⛰️';
+    if (terrain.includes('city')) return '🏙️';
+    if (terrain.includes('dungeon') || terrain.includes('cave')) return '⚔️';
+    if (terrain.includes('cosmic') || terrain.includes('void')) return '🌌';
+    if (terrain.includes('desert')) return '🏜️';
+    if (terrain.includes('ocean') || terrain.includes('sea')) return '🌊';
+    return '📍';
   };
 
-  const getCategoryColor = (subcategory: string) => {
-    switch (subcategory.toLowerCase()) {
-      case 'villages':
-        return 'bg-green-100 dark:bg-green-900 text-green-600';
-      case 'forests':
-        return 'bg-emerald-100 dark:bg-emerald-900 text-emerald-600';
-      case 'mountains':
-        return 'bg-gray-100 dark:bg-gray-900 text-gray-600';
-      case 'cities':
-        return 'bg-blue-100 dark:bg-blue-900 text-blue-600';
-      case 'dungeons':
-        return 'bg-red-100 dark:bg-red-900 text-red-600';
-      case 'realms':
-        return 'bg-purple-100 dark:bg-purple-900 text-purple-600';
-      default:
-        return 'bg-amber-100 dark:bg-amber-900 text-amber-600';
-    }
+  const getCategoryColor = (terrainType: string) => {
+    const terrain = terrainType.toLowerCase();
+    if (terrain.includes('village')) return 'bg-green-100 dark:bg-green-900 text-green-600';
+    if (terrain.includes('forest')) return 'bg-emerald-100 dark:bg-emerald-900 text-emerald-600';
+    if (terrain.includes('mountain')) return 'bg-gray-100 dark:bg-gray-900 text-gray-600';
+    if (terrain.includes('city')) return 'bg-blue-100 dark:bg-blue-900 text-blue-600';
+    if (terrain.includes('dungeon') || terrain.includes('cave')) return 'bg-red-100 dark:bg-red-900 text-red-600';
+    if (terrain.includes('cosmic') || terrain.includes('void')) return 'bg-purple-100 dark:bg-purple-900 text-purple-600';
+    if (terrain.includes('desert')) return 'bg-yellow-100 dark:bg-yellow-900 text-yellow-600';
+    if (terrain.includes('ocean') || terrain.includes('sea')) return 'bg-cyan-100 dark:bg-cyan-900 text-cyan-600';
+    return 'bg-amber-100 dark:bg-amber-900 text-amber-600';
   };
 
   return (
@@ -137,25 +127,25 @@ export default function LocationsPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredLocations.map((location) => (
               <div 
-                key={location.name} 
+                key={location.id} 
                 className="underwater-card p-6 relative overflow-hidden hover:scale-105 transition-transform"
               >
                 {/* Decorative Icon */}
                 <div className="absolute top-2 right-2 text-5xl opacity-15">
-                  {getLocationIcon(location.subcategory)}
+                  {getLocationIcon(location.terrainType)}
                 </div>
                 
                 <div className="relative z-10">
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <h3 className="font-bold text-xl">{location.name}</h3>
                     <Badge variant="outline" className="text-xs bg-blue-100 dark:bg-blue-900 shrink-0">
-                      Ch. {location.firstAppearance}
+                      Ch. {location.chapters[0]}
                     </Badge>
                   </div>
                   
                   <div className="mb-3">
-                    <Badge className={`text-xs capitalize ${getCategoryColor(location.subcategory)}`}>
-                      {location.subcategory}
+                    <Badge className={`text-xs ${getCategoryColor(location.terrainType)}`}>
+                      {location.terrainType}
                     </Badge>
                   </div>
                   
@@ -163,10 +153,13 @@ export default function LocationsPage() {
                     {location.description}
                   </p>
                   
-                  {location.notes && (
-                    <p className="text-xs text-muted-foreground italic border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
-                      {location.notes}
-                    </p>
+                  {location.specialFeatures && location.specialFeatures.length > 0 && (
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
+                      <p className="text-xs text-muted-foreground font-semibold mb-1">Special Features:</p>
+                      <p className="text-xs text-muted-foreground">
+                        {location.specialFeatures.slice(0, 3).join(' • ')}
+                      </p>
+                    </div>
                   )}
                 </div>
               </div>

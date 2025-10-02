@@ -28,7 +28,7 @@ export function getAllLocations(): Location[] {
     skip_empty_lines: true,
   });
 
-  cachedLocations = records.map((record: any) => {
+  const locations = records.map((record: any) => {
     const safeName = record.name
       .toLowerCase()
       .replace(/ /g, '-')
@@ -48,7 +48,8 @@ export function getAllLocations(): Location[] {
     };
   });
 
-  return cachedLocations;
+  cachedLocations = locations;
+  return locations;
 }
 
 export function getLocationByName(name: string): Location | undefined {

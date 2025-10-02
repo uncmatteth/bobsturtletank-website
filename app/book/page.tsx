@@ -10,14 +10,14 @@ export const metadata = {
   description: "Open the treasure chest! Explore all 69 chapters, 143 locations, 100+ characters, and magical artifacts from Bob's epic adventure.",
 };
 
-export default async function BookPage() {
+export default function BookPage() {
   const charactersCount = getAllCharacters().length;
   const artifactsCount = getAllArtifacts().length;
-  const realLocations = await getAllRealLocations();
+  const realLocations = getAllRealLocations();
   const locationsCount = realLocations.length;
 
   return (
-    <div className="container mx-auto px-4 py-12 min-h-screen">
+    <div className="container mx-auto px-4 py-12 min-h-screen underwater-background">
       {/* Hero Header - Treasure Chest Theme */}
       <div className="text-center mb-16 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-amber-100/20 to-transparent dark:from-amber-900/20 pointer-events-none" />

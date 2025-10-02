@@ -105,30 +105,31 @@ export function generateTriviaQuestions(count: number = 10): TriviaQuestion[] {
   // Location questions
   const locations = getAllLocations();
   locations.forEach(location => {
-    // Question about location type
-    if (location.subcategory) {
-      const otherTypes = ['Villages', 'Forests', 'Mountains', 'Cities', 'Dungeons', 'Realms']
-        .filter(t => t !== location.subcategory);
+    // Question about location terrain type
+    if (location.terrainType) {
+      const otherTypes = ['Forest', 'Village', 'Mountains', 'City', 'Dungeon', 'Desert', 'Cosmic']
+        .filter(t => !location.terrainType.toLowerCase().includes(t.toLowerCase()));
       
       allQuestions.push({
-        question: `What type of location is ${location.name}?`,
-        correctAnswer: location.subcategory,
+        question: `What type of terrain is ${location.name}?`,
+        correctAnswer: location.terrainType,
         wrongAnswers: shuffle(otherTypes).slice(0, 3),
         category: 'locations',
       });
     }
 
     // Question about first appearance
-    if (location.firstAppearance) {
+    if (location.chapters && location.chapters.length > 0) {
+      const firstChapter = location.chapters[0];
       const wrongChapters = locations
-        .filter(l => l.name !== location.name && l.firstAppearance && l.firstAppearance !== location.firstAppearance)
-        .map(l => l.firstAppearance)
+        .filter(l => l.name !== location.name && l.chapters && l.chapters.length > 0 && l.chapters[0] !== firstChapter)
+        .map(l => l.chapters[0])
         .slice(0, 3);
       
       if (wrongChapters.length === 3) {
         allQuestions.push({
           question: `In which chapter was ${location.name} first mentioned or visited?`,
-          correctAnswer: `Chapter ${location.firstAppearance}`,
+          correctAnswer: `Chapter ${firstChapter}`,
           wrongAnswers: wrongChapters.map(ch => `Chapter ${ch}`),
           category: 'locations',
         });

@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 min-h-screen underwater-background">
       {/* Hero Header */}
       <div className="text-center mb-16">
         <div className="inline-block mb-4 text-sm text-emerald-600 dark:text-emerald-300 font-medium tracking-wide">

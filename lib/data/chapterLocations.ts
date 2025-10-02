@@ -28,7 +28,7 @@ export function getAllChapters(): Chapter[] {
     skip_empty_lines: true,
   });
 
-  cachedChapters = records.map((record: any) => {
+  const chapters = records.map((record: any) => {
     const chapterNum = parseInt(record.first_chapter);
     const safeName = record.name
       .toLowerCase()
@@ -50,9 +50,10 @@ export function getAllChapters(): Chapter[] {
   });
 
   // Sort by chapter number
-  cachedChapters.sort((a, b) => a.first_chapter - b.first_chapter);
+  chapters.sort((a: Chapter, b: Chapter) => a.first_chapter - b.first_chapter);
 
-  return cachedChapters;
+  cachedChapters = chapters;
+  return chapters;
 }
 
 export function getChapterByNumber(chapterNum: number): Chapter | undefined {
