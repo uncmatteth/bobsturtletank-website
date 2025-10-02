@@ -1,117 +1,121 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Gamepad2, Book, Trophy, Sparkles, Zap } from "lucide-react";
-import { SpectacularHero } from "@/components/hero/SpectacularHero";
+import { Gamepad2, Book, Trophy, Sparkles, Zap, MapPin } from "lucide-react";
+import { TankHero } from "@/components/hero/TankHero";
 import { BobCarousel } from "@/components/sections/BobCarousel";
-import { GlassmorphicCard } from "@/components/cards/GlassmorphicCard";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted">
-      {/* Spectacular Hero */}
-      <SpectacularHero />
+    <div className="min-h-screen">
+      {/* Tank Hero - Looking into Bob's Tank */}
+      <TankHero />
 
-      {/* Featured Content with Glassmorphism */}
+      {/* Tank Zones - Explore Different Areas */}
       <section className="container mx-auto px-4 py-20 relative">
         <div className="text-center mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-turtle-green-600 to-ocean-blue-600">
-            Explore Bob's Universe
+          <div className="inline-block mb-4 text-sm text-blue-600 dark:text-blue-300 font-medium tracking-wide">
+            🗺️ EXPLORE DIFFERENT TANK ZONES 🌊
+          </div>
+          <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 tank-title">
+            What's In Bob's Tank?
           </h2>
           <p className="text-xl text-muted-foreground">
-            Games, stories, and adventures await!
+            Dive into different zones of Bob's underwater kingdom!
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Featured Game */}
-          <GlassmorphicCard bobImage={15} className="p-6">
-            <div className="flex items-center gap-2 text-turtle-green-400 mb-3">
-              <Gamepad2 className="h-8 w-8" />
-              <h3 className="font-bold text-2xl text-white">Featured Game</h3>
-            </div>
-            <h4 className="font-semibold text-xl mb-3 text-white">Turtle Bouncy Bounce</h4>
-            <p className="text-white/80 mb-6">
-              Help Bob bounce higher and higher! Dodge platforms, collect coins, and see how high you can go.
-            </p>
-            <Button asChild className="w-full bg-turtle-green-600 hover:bg-turtle-green-500">
-              <Link href="/games/bounce">Play Now</Link>
-            </Button>
-          </GlassmorphicCard>
-
-          {/* Buy the Book */}
-          <GlassmorphicCard bobImage={28} className="p-6">
-            <div className="flex items-center gap-2 text-ocean-blue-400 mb-3">
+          {/* Treasure Chest - The Book */}
+          <div className="underwater-card p-6 treasure-chest relative">
+            <div className="flex items-center gap-2 text-yellow-300 mb-3 relative z-10">
               <Book className="h-8 w-8" />
-              <h3 className="font-bold text-2xl text-white">The Book</h3>
+              <h3 className="font-bold text-2xl text-white drop-shadow-lg">Treasure Chest</h3>
             </div>
-            <h4 className="font-semibold text-xl mb-3 text-white">69 Epic Chapters</h4>
-            <p className="text-white/80 mb-6">
-              From Cedar Hollow to the cosmic void - experience the complete adventure!
+            <h4 className="font-semibold text-xl mb-3 text-white drop-shadow relative z-10">69 Epic Chapters</h4>
+            <p className="text-white/90 mb-6 relative z-10">
+              Open the treasure chest to discover Bob's complete adventure from Cedar Hollow to the cosmic void!
             </p>
-            <Button asChild className="w-full bg-ocean-blue-600 hover:bg-ocean-blue-500">
-              <Link href="/book/buy">Buy Now</Link>
+            <Button asChild className="w-full bg-yellow-600 hover:bg-yellow-500 relative z-10">
+              <Link href="/book">🔓 Open Chest</Link>
             </Button>
-          </GlassmorphicCard>
+          </div>
 
-          {/* Character Encyclopedia */}
-          <GlassmorphicCard bobImage={42} className="p-6">
-            <div className="flex items-center gap-2 text-purple-400 mb-3">
+          {/* Underwater Arcade */}
+          <div className="underwater-arcade p-6">
+            <div className="flex items-center gap-2 text-cyan-400 mb-3">
+              <Gamepad2 className="h-8 w-8" />
+              <h3 className="font-bold text-2xl text-white drop-shadow-lg">Underwater Arcade</h3>
+            </div>
+            <h4 className="font-semibold text-xl mb-3 text-white drop-shadow">Play in the Tank!</h4>
+            <p className="text-white/90 mb-6">
+              Bob's favorite arcade machines are at the bottom of the tank - waterproof and ready to play!
+            </p>
+            <Button asChild className="w-full bg-cyan-600 hover:bg-cyan-500">
+              <Link href="/games">🎮 Start Gaming</Link>
+            </Button>
+          </div>
+
+          {/* Tank Residents */}
+          <div className="underwater-card p-6">
+            <div className="flex items-center gap-2 text-purple-600 mb-3">
               <Sparkles className="h-8 w-8" />
-              <h3 className="font-bold text-2xl text-white">Characters</h3>
+              <h3 className="font-bold text-2xl">Tank Residents</h3>
             </div>
-            <h4 className="font-semibold text-xl mb-3 text-white">Meet the Cast</h4>
-            <p className="text-white/80 mb-6">
-              Explore the rich cast of characters from Uncle Matt and Bob to cosmic entities!
+            <h4 className="font-semibold text-xl mb-3">100+ Characters</h4>
+            <p className="text-muted-foreground mb-6">
+              Meet all the friends, allies, and visitors who've stopped by Bob's tank!
             </p>
-            <Button asChild variant="outline" className="w-full border-white/30 text-white hover:bg-white/20">
-              <Link href="/book/characters">Browse All</Link>
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/book/characters">👥 Meet Everyone</Link>
             </Button>
-          </GlassmorphicCard>
+          </div>
 
-          {/* Trivia Game */}
-          <GlassmorphicCard bobImage={55} className="p-6">
-            <div className="flex items-center gap-2 text-yellow-400 mb-3">
-              <Trophy className="h-8 w-8" />
-              <h3 className="font-bold text-2xl text-white">Trivia Challenge</h3>
+          {/* Sunken Treasures */}
+          <div className="underwater-card p-6 relative overflow-hidden">
+            <div className="absolute top-4 right-4 text-4xl opacity-20 treasure-glow">💎</div>
+            <div className="flex items-center gap-2 text-amber-600 mb-3">
+              <Sparkles className="h-8 w-8" />
+              <h3 className="font-bold text-2xl">Sunken Treasures</h3>
             </div>
-            <h4 className="font-semibold text-xl mb-3 text-white">Test Your Knowledge</h4>
-            <p className="text-white/80 mb-6">
-              How well do you know Bob's Adventure Realm? Take the ultimate trivia challenge!
+            <h4 className="font-semibold text-xl mb-3">50+ Magical Artifacts</h4>
+            <p className="text-muted-foreground mb-6">
+              Scattered across the tank floor - enchanted crystals, cosmic weapons, and legendary items!
+            </p>
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/book/artifacts">💎 Find Treasures</Link>
+            </Button>
+          </div>
+
+          {/* Tank Quiz Master */}
+          <div className="underwater-card p-6 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950 dark:to-orange-950">
+            <div className="flex items-center gap-2 text-yellow-600 mb-3">
+              <Trophy className="h-8 w-8" />
+              <h3 className="font-bold text-2xl">Tank Expert Test</h3>
+            </div>
+            <h4 className="font-semibold text-xl mb-3">Trivia Challenge</h4>
+            <p className="text-muted-foreground mb-6">
+              Think you know Bob's tank better than anyone? Prove it in the ultimate tank knowledge quiz!
             </p>
             <Button asChild className="w-full bg-yellow-600 hover:bg-yellow-500">
-              <Link href="/book/trivia">Play Trivia</Link>
+              <Link href="/book/trivia">🏆 Take Quiz</Link>
             </Button>
-          </GlassmorphicCard>
+          </div>
 
-          {/* Artifacts */}
-          <GlassmorphicCard bobImage={67} className="p-6">
-            <div className="flex items-center gap-2 text-amber-400 mb-3">
-              <Sparkles className="h-8 w-8" />
-              <h3 className="font-bold text-2xl text-white">Artifacts</h3>
+          {/* Adventure Atlas - FEATURED */}
+          <div className="underwater-card p-6 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950 border-2 border-blue-400 dark:border-blue-600 relative overflow-hidden">
+            <div className="absolute top-0 right-0 text-6xl opacity-10">🗺️</div>
+            <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 mb-3 relative z-10">
+              <MapPin className="h-8 w-8" />
+              <h3 className="font-bold text-2xl">Adventure Atlas</h3>
             </div>
-            <h4 className="font-semibold text-xl mb-3 text-white">Magical Items</h4>
-            <p className="text-white/80 mb-6">
-              Discover enchanted crystals, cosmic weapons, and legendary treasures!
+            <h4 className="font-semibold text-xl mb-3 relative z-10">143 Pixel Art Maps!</h4>
+            <p className="text-muted-foreground mb-6 relative z-10">
+              Explore EVERY location from the 69-chapter journey! Complete world map with journey paths, individual maps for all 143 places!
             </p>
-            <Button asChild variant="outline" className="w-full border-white/30 text-white hover:bg-white/20">
-              <Link href="/book/artifacts">Explore Artifacts</Link>
+            <Button asChild className="w-full bg-blue-600 hover:bg-blue-700 relative z-10">
+              <Link href="/book/maps">🗺️ Explore Complete Atlas</Link>
             </Button>
-          </GlassmorphicCard>
-
-          {/* Locations */}
-          <GlassmorphicCard bobImage={79} className="p-6">
-            <div className="flex items-center gap-2 text-green-400 mb-3">
-              <Zap className="h-8 w-8" />
-              <h3 className="font-bold text-2xl text-white">Locations</h3>
-            </div>
-            <h4 className="font-semibold text-xl mb-3 text-white">Realms & Worlds</h4>
-            <p className="text-white/80 mb-6">
-              Journey through forests, mountains, cosmic voids, and digital dimensions!
-            </p>
-            <Button asChild variant="outline" className="w-full border-white/30 text-white hover:bg-white/20">
-              <Link href="/book/locations">Visit Locations</Link>
-            </Button>
-          </GlassmorphicCard>
+          </div>
         </div>
       </section>
 
