@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐢 Bob's Sprite Asset Viewer</title>
+    <title>🐢 Bob's Master Sprite Library - BrowserQuest Assets</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
             color: #eee;
             padding: 20px;
             min-height: 100vh;
@@ -22,16 +22,16 @@
         .header {
             text-align: center;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 212, 255, 0.1);
             border-radius: 15px;
             margin-bottom: 30px;
-            border: 2px solid #0f3460;
+            border: 2px solid #00d4ff;
         }
         
         h1 {
             font-size: 48px;
             color: #00d4ff;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
             margin-bottom: 10px;
         }
         
@@ -41,70 +41,74 @@
             margin-top: 10px;
         }
         
-        .controls {
+        .stats {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-box {
+            padding: 20px 30px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
             border-radius: 10px;
+            text-align: center;
+            min-width: 150px;
         }
         
-        .controls label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 15px;
-            background: rgba(15, 52, 96, 0.5);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
+        .stat-number {
+            font-size: 42px;
+            font-weight: bold;
+            color: #00d4ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
         
-        .controls label:hover {
-            background: rgba(15, 52, 96, 0.8);
-            transform: translateY(-2px);
-        }
-        
-        .controls input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
+        .stat-label {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 5px;
+            text-transform: uppercase;
         }
         
         .section {
-            margin-bottom: 40px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 25px;
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 30px;
             border-radius: 15px;
-            border: 2px solid #0f3460;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
         
         .section-title {
-            font-size: 32px;
+            font-size: 36px;
             color: #00d4ff;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #0f3460;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+        }
+        
+        .section-desc {
+            color: #aaa;
+            margin-bottom: 25px;
+            font-size: 14px;
         }
         
         .sprite-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
             margin-top: 20px;
         }
         
         .sprite-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #0f3460;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(0, 212, 255, 0.2);
             border-radius: 10px;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
             transition: all 0.3s;
             cursor: pointer;
@@ -113,19 +117,18 @@
         .sprite-card:hover {
             transform: scale(1.05);
             border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
         
         .sprite-preview {
             width: 100%;
-            height: 120px;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 8px;
-            margin-bottom: 10px;
-            position: relative;
+            margin-bottom: 8px;
             overflow: hidden;
         }
         
@@ -138,74 +141,13 @@
         }
         
         .sprite-name {
-            font-size: 12px;
+            font-size: 11px;
             color: #00d4ff;
             word-break: break-word;
-            margin-bottom: 5px;
-        }
-        
-        .sprite-path {
-            font-size: 10px;
-            color: #888;
-            word-break: break-all;
-        }
-        
-        .sprite-size {
-            font-size: 10px;
-            color: #aaa;
-            margin-top: 5px;
-        }
-        
-        .loading {
-            text-align: center;
-            font-size: 24px;
-            padding: 50px;
-            color: #00d4ff;
-        }
-        
-        .stats {
+            min-height: 32px;
             display: flex;
-            gap: 20px;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        
-        .stat-box {
-            padding: 15px 25px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px solid #00d4ff;
-            border-radius: 10px;
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #00d4ff;
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: #aaa;
-            margin-top: 5px;
-        }
-        
-        .delete-btn {
-            margin-top: 10px;
-            padding: 5px 10px;
-            background: rgba(255, 0, 0, 0.3);
-            border: 1px solid #ff0000;
-            color: #ff6b6b;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 11px;
-            transition: all 0.3s;
-        }
-        
-        .delete-btn:hover {
-            background: rgba(255, 0, 0, 0.6);
-            color: white;
         }
         
         .modal {
@@ -215,7 +157,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -237,136 +179,207 @@
             image-rendering: pixelated;
             border: 3px solid #00d4ff;
             border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.8);
         }
         
         .modal-close {
             position: absolute;
-            top: -40px;
+            top: -50px;
             right: 0;
-            font-size: 30px;
+            font-size: 40px;
             color: white;
             cursor: pointer;
             background: rgba(255, 0, 0, 0.7);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s;
         }
         
-        .hidden {
-            display: none !important;
+        .modal-close:hover {
+            background: rgba(255, 0, 0, 1);
+            transform: scale(1.1);
+        }
+        
+        .modal-info {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+        }
+        
+        .loading {
+            text-align: center;
+            font-size: 24px;
+            padding: 50px;
+            color: #00d4ff;
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>🐢 Bob's Sprite Asset Viewer</h1>
-        <p class="subtitle">Review all sprites and decide what to keep for the new roguelike</p>
+        <h1>🐢 Bob's Master Sprite Library</h1>
+        <p class="subtitle">BrowserQuest Reskin Assets - 888 Sprites Ready for Roguelike!</p>
     </div>
 
     <div class="stats" id="stats">
         <div class="stat-box">
-            <div class="stat-number" id="total-sprites">0</div>
+            <div class="stat-number">888</div>
             <div class="stat-label">Total Sprites</div>
         </div>
         <div class="stat-box">
-            <div class="stat-number" id="total-categories">0</div>
-            <div class="stat-label">Categories</div>
+            <div class="stat-number" id="player-count">0</div>
+            <div class="stat-label">Bob Sprites</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="enemy-count">0</div>
+            <div class="stat-label">Enemies</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="item-count">0</div>
+            <div class="stat-label">Items</div>
         </div>
     </div>
 
-    <div class="controls">
-        <label>
-            <input type="checkbox" id="show-characters" checked>
-            Show Characters (Green Turtle)
-        </label>
-        <label>
-            <input type="checkbox" id="show-enemies" checked>
-            Show Enemies
-        </label>
-        <label>
-            <input type="checkbox" id="show-items" checked>
-            Show Items
-        </label>
-        <label>
-            <input type="checkbox" id="show-effects" checked>
-            Show Effects
-        </label>
-        <label>
-            <input type="checkbox" id="show-environment" checked>
-            Show Environment
-        </label>
-        <label>
-            <input type="checkbox" id="show-ui" checked>
-            Show UI
-        </label>
-    </div>
-
     <div id="content">
-        <div class="loading">🐢 Loading sprites...</div>
+        <div class="loading">🐢 Loading BrowserQuest sprites...</div>
     </div>
 
     <div class="modal" id="modal">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal()">×</div>
             <img id="modal-img" src="" alt="Sprite Preview">
+            <div class="modal-info" id="modal-info"></div>
         </div>
     </div>
 
     <script>
-        // Define all sprite paths based on the asset structure
-        const assetCategories = {
-            'Green Turtle (Hero)': 'assets/extracted/green_turtle/rotations',
-            'Characters': 'assets/extracted/characters/rotations',
-            'Enemies': 'assets/extracted/enemies/rotations',
-            'Items': 'assets/extracted/items/rotations',
-            'Effects': 'assets/extracted/effects/rotations',
-            'Environment': 'assets/extracted/environment/rotations',
-            'UI': 'assets/extracted/ui/rotations',
+        const spriteCategories = {
+            'Bob Player Sprites': {
+                icon: '🐢',
+                desc: 'All Bob turtle player animations - idle, walk, attack, jump, etc.',
+                paths: [
+                    'browserquest-assets/player/bob_idle',
+                    'browserquest-assets/player/bob_walk_down',
+                    'browserquest-assets/player/bob_walk_left',
+                    'browserquest-assets/player/bob_walk_right',
+                    'browserquest-assets/player/bob_walk_up',
+                    'browserquest-assets/player/bob_atk_down',
+                    'browserquest-assets/player/bob_atk_left',
+                    'browserquest-assets/player/bob_atk_right',
+                    'browserquest-assets/player/bob_atk_up',
+                    'browserquest-assets/player/bob_run',
+                    'browserquest-assets/player/bob_jump',
+                    'browserquest-assets/player/bob_fall',
+                    'browserquest-assets/player/bob_hit',
+                    'browserquest-assets/player/bob_attack',
+                    'browserquest-assets/player/bob_air_attack',
+                    'browserquest-assets/player/bob_base',
+                    'browserquest-assets/player/bob_idle_down',
+                    'browserquest-assets/player/bob_idle_left',
+                    'browserquest-assets/player/bob_idle_right',
+                    'browserquest-assets/player/bob_idle_up',
+                    'browserquest-assets/player/bob_wall'
+                ]
+            },
+            'Enemies & Bosses': {
+                icon: '👹',
+                desc: 'All enemy sprites - griffins, elven guardians, zoxoleon, etc.',
+                paths: [
+                    'browserquest-assets/enemies'
+                ]
+            },
+            'Items & Collectibles': {
+                icon: '💎',
+                desc: 'Potions, diamonds, gold, silver, skulls',
+                paths: [
+                    'browserquest-assets/items'
+                ]
+            },
+            'Level & Environment': {
+                icon: '🏰',
+                desc: 'Tiles, backgrounds, decorations, water, clouds',
+                paths: [
+                    'browserquest-assets/level'
+                ]
+            },
+            'Effects & Particles': {
+                icon: '✨',
+                desc: 'Water effects, particles, visual effects',
+                paths: [
+                    'browserquest-assets/effects'
+                ]
+            },
+            'UI Elements': {
+                icon: '🎮',
+                desc: 'Hearts, UI elements, interface components',
+                paths: [
+                    'browserquest-assets/ui'
+                ]
+            },
+            'Objects': {
+                icon: '🚤',
+                desc: 'Boats, items, interactive objects',
+                paths: [
+                    'browserquest-assets/objects'
+                ]
+            },
+            'Map Elements': {
+                icon: '🗺️',
+                desc: 'Map icons, overworld elements',
+                paths: [
+                    'browserquest-assets/map',
+                    'browserquest-assets/overworld'
+                ]
+            }
         };
-
-        const directions = [
-            'north', 'north-east', 'east', 'south-east',
-            'south', 'south-west', 'west', 'north-west'
-        ];
 
         let allSprites = [];
-        let stats = {
-            total: 0,
-            categories: 0
-        };
 
         async function loadSprites() {
             const content = document.getElementById('content');
             content.innerHTML = '';
-            allSprites = [];
 
-            for (const [category, basePath] of Object.entries(assetCategories)) {
+            let playerCount = 0;
+            let enemyCount = 0;
+            let itemCount = 0;
+
+            for (const [category, info] of Object.entries(spriteCategories)) {
                 const section = document.createElement('div');
                 section.className = 'section';
-                section.dataset.category = category.toLowerCase().replace(/\s+/g, '-');
                 
                 const title = document.createElement('h2');
                 title.className = 'section-title';
-                title.textContent = `${getCategoryIcon(category)} ${category}`;
+                title.innerHTML = `${info.icon} ${category}`;
                 section.appendChild(title);
+
+                const desc = document.createElement('div');
+                desc.className = 'section-desc';
+                desc.textContent = info.desc;
+                section.appendChild(desc);
 
                 const grid = document.createElement('div');
                 grid.className = 'sprite-grid';
 
-                // Try to load all possible directions
-                for (const direction of directions) {
-                    const imgPath = `${basePath}/${direction}.png`;
-                    
-                    // Check if image exists
-                    const exists = await checkImageExists(imgPath);
-                    if (exists) {
-                        const card = createSpriteCard(imgPath, direction, category);
+                // For each path in this category
+                for (const basePath of info.paths) {
+                    const sprites = await findSpritesInPath(basePath);
+                    sprites.forEach(spritePath => {
+                        const card = createSpriteCard(spritePath, category);
                         grid.appendChild(card);
-                        allSprites.push({ path: imgPath, category, direction });
-                    }
+                        allSprites.push({ path: spritePath, category });
+
+                        // Count sprites
+                        if (category.includes('Bob')) playerCount++;
+                        else if (category.includes('Enemies')) enemyCount++;
+                        else if (category.includes('Items')) itemCount++;
+                    });
                 }
 
                 if (grid.children.length > 0) {
@@ -375,11 +388,37 @@
                 }
             }
 
-            updateStats();
-            attachFilters();
+            // Update counts
+            document.getElementById('player-count').textContent = playerCount;
+            document.getElementById('enemy-count').textContent = enemyCount;
+            document.getElementById('item-count').textContent = itemCount;
         }
 
-        function createSpriteCard(path, name, category) {
+        async function findSpritesInPath(basePath) {
+            // For directories, we need to enumerate possible files
+            // Since we can't list directories in browser, we'll try common patterns
+            const sprites = [];
+            const maxFrames = 20; // Try up to 20 frames
+
+            // Try numbered frames (0.png, 1.png, etc.)
+            for (let i = 0; i < maxFrames; i++) {
+                const path = `${basePath}/${i}.png`;
+                if (await checkImageExists(path)) {
+                    sprites.push(path);
+                }
+            }
+
+            // If no numbered frames, try the path itself as an image
+            if (sprites.length === 0) {
+                if (await checkImageExists(`${basePath}.png`)) {
+                    sprites.push(`${basePath}.png`);
+                }
+            }
+
+            return sprites;
+        }
+
+        function createSpriteCard(path, category) {
             const card = document.createElement('div');
             card.className = 'sprite-card';
             card.onclick = () => openModal(path);
@@ -389,15 +428,9 @@
 
             const img = document.createElement('img');
             img.src = path;
-            img.alt = name;
+            img.alt = path.split('/').pop();
             img.onerror = () => {
-                preview.innerHTML = '<div style="color: #ff6b6b;">❌ Failed to load</div>';
-            };
-            img.onload = () => {
-                const size = document.createElement('div');
-                size.className = 'sprite-size';
-                size.textContent = `${img.naturalWidth}×${img.naturalHeight}px`;
-                card.appendChild(size);
+                preview.innerHTML = '<div style="color: #ff6b6b; font-size: 10px;">Not found</div>';
             };
 
             preview.appendChild(img);
@@ -405,28 +438,11 @@
 
             const nameDiv = document.createElement('div');
             nameDiv.className = 'sprite-name';
-            nameDiv.textContent = name.toUpperCase();
+            const fileName = path.split('/').slice(-2).join('/');
+            nameDiv.textContent = fileName;
             card.appendChild(nameDiv);
 
-            const pathDiv = document.createElement('div');
-            pathDiv.className = 'sprite-path';
-            pathDiv.textContent = path;
-            card.appendChild(pathDiv);
-
             return card;
-        }
-
-        function getCategoryIcon(category) {
-            const icons = {
-                'Green Turtle (Hero)': '🐢',
-                'Characters': '👤',
-                'Enemies': '👹',
-                'Items': '💎',
-                'Effects': '✨',
-                'Environment': '🌳',
-                'UI': '🎮'
-            };
-            return icons[category] || '📦';
         }
 
         function checkImageExists(url) {
@@ -438,37 +454,12 @@
             });
         }
 
-        function updateStats() {
-            document.getElementById('total-sprites').textContent = allSprites.length;
-            document.getElementById('total-categories').textContent = Object.keys(assetCategories).length;
-        }
-
-        function attachFilters() {
-            const filterMap = {
-                'show-characters': ['green-turtle-(hero)', 'characters'],
-                'show-enemies': ['enemies'],
-                'show-items': ['items'],
-                'show-effects': ['effects'],
-                'show-environment': ['environment'],
-                'show-ui': ['ui']
-            };
-
-            for (const [checkboxId, categories] of Object.entries(filterMap)) {
-                document.getElementById(checkboxId).addEventListener('change', (e) => {
-                    categories.forEach(cat => {
-                        const sections = document.querySelectorAll(`[data-category="${cat}"]`);
-                        sections.forEach(section => {
-                            section.classList.toggle('hidden', !e.target.checked);
-                        });
-                    });
-                });
-            }
-        }
-
         function openModal(imgPath) {
             const modal = document.getElementById('modal');
             const modalImg = document.getElementById('modal-img');
+            const modalInfo = document.getElementById('modal-info');
             modalImg.src = imgPath;
+            modalInfo.textContent = imgPath;
             modal.classList.add('active');
         }
 
@@ -495,4 +486,3 @@
     </script>
 </body>
 </html>
-
