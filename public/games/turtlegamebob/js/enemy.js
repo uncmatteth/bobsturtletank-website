@@ -13,9 +13,7 @@ const Enemy = {
             damage: 10,
             speed: 120,
             sprite: 'goblin',
-            aggr
-
-oRange: 200
+            aggroRange: 200
         },
         'skeleton': {
             health: 50,
