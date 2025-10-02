@@ -101,3 +101,4 @@ console.log(`   - artifacts.json (${allArtifacts.length} artifacts including ${s
 console.log(`   - locations.json (${locations.length} locations)`);
 console.log(`\nTotal items: ${characters.length + allArtifacts.length + locations.length}`);
 console.log('🎉 Build complete!');
+

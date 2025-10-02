@@ -1,0 +1,29 @@
+Location Name,Region,Terrain Type,Chapters,Description,Map Type,Tileset Style,Coordinates X,Coordinates Y,Special Features,Connected To,Status
+Cedar Hollow,Starting Zone,Village/Forest,"1,2",Remote village surrounded by Iron Mountains - Matt's starting home,Top-down,Grass to Forest,0,0,Thatched cottages; market square; Willow Woods nearby,Willow Woods; Morning Meadows,Mapped
+Willow Woods,Starting Zone,Forest,1,Tranquil forest with playful sunlight and birdsong,Top-down,Forest,1,0,Dense canopy; wildlife; shaded trails,Cedar Hollow; Morning Meadows,Mapped
+Morning Meadows,Starting Zone,Grassland,1,Sun-kissed grassy meadows where Matt first meets Bob,Top-down,Grass,2,0,Sheltered dell; babbling brook; wildflowers,Willow Woods; First Encounter,Mapped
+Iron Mountains,Starting Zone,Mountains,1,Mountain range surrounding Cedar Hollow,Sidescroller,Stone/Rock,0,1,Towering peaks; distant backdrop,Cedar Hollow,Pending
+Crossroads Town,Early Journey,Village/Market,"10,11",Bustling market town with vibrant trade,Top-down,Cobblestone,3,1,Market square; merchants; music,Grassy Plains,Mapped
+Karnov's Carnival,Early Journey,Festival Grounds,11,Traveling carnival with colorful tents and wonders,Top-down,Grass/Festival,4,1,Striped tents; exotic animals; merchants; performers,Grassy Plains,Pending
+The Labyrinth,Mid Journey,Dungeon,34,Hulking stone labyrinth rising from barren valley,Sidescroller,Stone Dungeon,5,2,Deadly shifting trials; cryptic symbols,Valley,Mapped
+Metropolis,Mid Journey,City,24,Great city of legend - towering skyscrapers and neon,Top-down,Urban/Concrete,6,3,Skyscrapers; neon signs; street performers,Celebration Isle,Mapped
+City of Dreams,Mid Journey,City,24,Same as Metropolis - urban wonderland,Top-down,Urban/Concrete,6,3,Acrobatics; illusions; technology,Metropolis,Duplicate
+Groove Glades,Mid Journey,City,26,Bustling city hub with flashy hyperkinetic energy,Top-down,Urban,7,3,Glittering towers; vibrant murals; winding alleys,Metropolis,Pending
+Celebration Isle,Mid Journey,Island,24,Island with monstrous creatures - escaped at night,Top-down,Tropical/Beach,5,3,Shadowed alleyways; dark creatures,Metropolis,Pending
+Cerulean Sea,Mid Journey,Ocean,40,Shimmering azure ocean leading to distant lands,Top-down,Water,8,4,Azure swells; starlit navigation; weeks of travel,Eventide; Desert of Echoes,Mapped
+Eventide,Mid Journey,Mystical Island,40,Mist-veiled mystical island - sylvan sanctuary,Top-down,Forest/Mystical,9,4,Primal wilds; eternal essence; ancient intuitions,Cerulean Sea,Pending
+Desert of Echoes,Late Journey,Desert,40,Remote desert valley with occult secrets - the Desolation,Top-down,Sand to Rock,10,5,Sun-scorched dunes; mirages; endless sand; twin suns,Cerulean Sea; Lushwood,Mapped
+Lushwood,Late Journey,Forest,41,Verdant sanctum - primeval forest after desert,Top-down,Forest Dense,11,4,Ancient pines; hemlock; oak; maple; dappled sunlight,Desert of Echoes; Foothills,Mapped
+Fimbul Peaks,Late Journey,Mountains,35,Jagged ice-fanged summits - frozen mountain range,Sidescroller,Ice/Snow,12,6,Storm-faced peaks; killing cold; snow plumes,Mountain Ascent,Pending
+Mountain Ascent,Late Journey,Mountains,35,Rugged terrain climbing to Fimbul Peaks,Sidescroller,Rock/Ice,12,5,Mist-wreathed peaks; icy ledges; cliffside caves; ancient rams,Lushwood; Fimbul Peaks,Pending
+Algorithmic Abyss,Digital Realm,Cyber Space,38C,Tangled cyber expanse where logic and chaos coexist,Sidescroller,Digital/Glitch,20,10,Fractal platforms; prismatic pathways; code towers; glitching rivers,Trivia Terrain,Pending
+Trivia Terrain,Digital Realm,Cyber Space,38,Digital realm leading to Algorithmic Abyss,Sidescroller,Digital,19,10,Digital dimensions; quiz challenges,Algorithmic Abyss,Pending
+Library of Light,Cosmic Realm,Ancient Library,61,Endless subterranean library in Levitaria,Sidescroller,Crystal/Metal,25,15,Crystalline staircases; photon lattices; cosmic history; glowing metallic stone,Levitaria,Pending
+Levitaria,Cosmic Realm,Planet,61,Ancient planet housing the Library of Light,Top-down,Alien Terrain,25,14,Deep crust caverns; vaulted archways,Library of Light,Pending
+Grassy Plains,Early Journey,Grassland,"10,11",Sweeping grassland between settlements,Top-down,Grass,3,0,Rolling hills; distant settlements,Crossroads Town; Karnov's Carnival,Mapped
+Barren Valley,Mid Journey,Wasteland,34,Desolate valley containing the Labyrinth,Top-down,Dirt/Stone,5,2,Barren floor; stone structures,The Labyrinth,Pending
+River Route,Mid Journey,River,35,Silvery river winding through ravines and peaks,Top-down,Water/River,13,3,Watercourse through nightbound hills; fresh adventures,Mountain Ascent,Pending
+Foothills,Late Journey,Hills,41,Rising foothills transitioning from desert to forest,Sidescroller,Grass/Rock,11,5,Switchback trails; scattered shrubs; cottonwood trees,Desert of Echoes; Lushwood,Pending
+Untamed Wilderness,Mid Journey,Wilderness,40,Remote wilderness realm beyond Cerulean Sea,Top-down,Mixed Terrain,9,5,Largely uncharted; hazardous; hidden enclaves,Cerulean Sea; Desert of Echoes,Pending
+Cosmic Void,Endgame,Space,Various,Abstract cosmic space for final journey,Sidescroller,Starfield/Void,30,20,Infinite darkness; cosmic entities; reality bending,Unknown,Pending
+

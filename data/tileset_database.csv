@@ -1,0 +1,20 @@
+Tileset Name,Type,Lower Terrain,Upper Terrain,Transition,Tile Size,Status,Tileset ID,Lower Base Tile ID,Upper Base Tile ID,Download URL,Used In Locations,Notes
+Grass to Forest,Top-down,lush grass meadow,dense green forest with trees,forest edge with scattered trees and bushes,16x16,Completed,5f023e98-631e-4b00-8401-09ffb39ce016,c9a2f70b-d253-4357-836f-f327b6a565d2,a3d627b9-8e86-49fb-b713-08c73521bd48,https://api.pixellab.ai/mcp/tilesets/5f023e98-631e-4b00-8401-09ffb39ce016/image,"Cedar Hollow, Willow Woods, Morning Meadows",Starting zone - Matt's journey begins ✅ READY
+Sand to Rock,Top-down,dry sand desert,rocky desert canyon walls,desert rocks and scattered stones,16x16,Completed,718bb4e1-b43a-4c06-b734-caaf7a8fd740,dc84ff64-10eb-40a4-a8c2-a909ef1724d0,8b63155a-e6b1-4307-90cb-d2250cd3f3a8,https://api.pixellab.ai/mcp/tilesets/718bb4e1-b43a-4c06-b734-caaf7a8fd740/image,Desert of Echoes,The Desolation wasteland ✅ READY
+Stone Platform,Sidescroller,stone brick platform,N/A,grass and moss,16x16,Completed,69c1288e-4b1a-4891-a048-7913cbb8e943,1f1404a4-2d9f-4cbf-b898-0ec99b621fae,N/A,https://api.pixellab.ai/mcp/sidescroller-tilesets/69c1288e-4b1a-4891-a048-7913cbb8e943/image,The Labyrinth,Ancient dungeon platforms ✅ READY
+Wooden Snow Platform,Sidescroller,wooden planks,N/A,snow and ice,16x16,Completed,654cdd0f-3c5f-49ec-96b9-cb07d7c2e116,b1dcde79-9c73-434b-8ac4-14ffcc952675,N/A,https://api.pixellab.ai/mcp/sidescroller-tilesets/654cdd0f-3c5f-49ec-96b9-cb07d7c2e116/image,Fimbul Peaks,Frozen mountain platforms ✅ READY
+Water to Beach,Top-down,ocean water,sandy beach,wet sand with foam,16x16,Needed,N/A,N/A,N/A,N/A,"Cerulean Sea, Celebration Isle",Ocean and island transitions
+Urban Concrete,Top-down,concrete ground,building walls,sidewalk with curb,16x16,Needed,N/A,N/A,N/A,N/A,"Metropolis, Groove Glades",City environments
+Dense Forest,Top-down,forest floor,thick canopy,undergrowth and bushes,16x16,Needed,N/A,N/A,N/A,N/A,Lushwood,Ancient primeval forest
+Rock to Ice,Sidescroller,stone cliff,N/A,ice and snow patches,16x16,Needed,N/A,N/A,N/A,N/A,Mountain Ascent,Climbing to Fimbul Peaks
+Digital Glitch,Sidescroller,digital platform,N/A,glitch effects and code,16x16,Needed,N/A,N/A,N/A,N/A,Algorithmic Abyss,Cyber realm platforms
+Crystal Library,Sidescroller,crystal platform,N/A,glowing photon lattice,16x16,Needed,N/A,N/A,N/A,N/A,Library of Light,Ancient cosmic library
+Grass Plains,Top-down,grass meadow,tall grass,wildflowers,16x16,Needed,N/A,N/A,N/A,N/A,Grassy Plains,Rolling grasslands
+Dirt to Stone,Top-down,dry dirt,stone ground,scattered rocks,16x16,Needed,N/A,N/A,N/A,N/A,Barren Valley,Wasteland around Labyrinth
+River Water,Top-down,grass bank,river water,riverbank stones,16x16,Needed,N/A,N/A,N/A,N/A,River Route,Winding rivers
+Hill Grass,Sidescroller,grass platform,N/A,rocks and shrubs,16x16,Needed,N/A,N/A,N/A,N/A,Foothills,Transition zone platforms
+Tropical Forest,Top-down,sand beach,jungle trees,palm trees and vines,16x16,Needed,N/A,N/A,N/A,N/A,Eventide,Mystical island
+Starfield Void,Sidescroller,void platform,N/A,cosmic energy,16x16,Needed,N/A,N/A,N/A,N/A,Cosmic Void,Space platforms
+Cobblestone,Top-down,dirt path,stone cobbles,rough cobbles,16x16,Needed,N/A,N/A,N/A,N/A,Crossroads Town,Market town streets
+Festival Ground,Top-down,grass,tent flooring,festival decorations,16x16,Needed,N/A,N/A,N/A,N/A,Karnov's Carnival,Carnival grounds
+

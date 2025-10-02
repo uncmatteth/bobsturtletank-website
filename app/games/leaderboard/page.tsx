@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function LeaderboardPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 min-h-screen underwater-background">
       <div className="text-center mb-12">
         <div className="flex items-center justify-center gap-3 mb-4">
           <Trophy className="h-10 w-10 text-yellow-600" />
@@ -51,3 +51,4 @@ export default function LeaderboardPage() {
     </div>
   );
 }
+

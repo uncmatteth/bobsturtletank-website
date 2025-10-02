@@ -27,3 +27,4 @@ export function searchArtifacts(query: string): Artifact[] {
     a.notes.toLowerCase().includes(lowerQuery)
   );
 }
+

@@ -139,3 +139,4 @@ export function generateTriviaQuestions(count: number = 10): TriviaQuestion[] {
   // Return a random selection
   return shuffle(allQuestions).slice(0, count);
 }
+

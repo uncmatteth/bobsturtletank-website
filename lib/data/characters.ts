@@ -32,3 +32,4 @@ export function searchCharacters(query: string): Character[] {
     c.notes.toLowerCase().includes(lowerQuery)
   );
 }
+

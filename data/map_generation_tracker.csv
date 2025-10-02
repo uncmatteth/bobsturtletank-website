@@ -1,0 +1,17 @@
+Map Name,Map Type,Size,Primary Tileset,Secondary Tileset,Locations Included,Chapters,Priority,Status,Preview URL,Download URL,Notes
+Starting Journey Map,Top-down,64x64,Grass to Forest,N/A,"Cedar Hollow, Willow Woods, Morning Meadows","1,2",High,Pending,N/A,N/A,Tutorial/starting area - Matt leaves home and meets Bob
+Grasslands Map,Top-down,48x48,Grass Plains,Cobblestone,"Crossroads Town, Grassy Plains, Karnov's Carnival","10,11",Medium,Pending,N/A,N/A,Early journey - market town and carnival
+Desert Journey,Top-down,64x64,Sand to Rock,N/A,Desert of Echoes,40,High,Pending,N/A,N/A,The Desolation - mirages and echoes
+Forest Sanctuary,Top-down,48x48,Dense Forest,Grass Plains,Lushwood,41,Medium,Pending,N/A,N/A,Verdant sanctum after desert
+Ocean Voyage,Top-down,64x64,Water to Beach,N/A,"Cerulean Sea, Eventide, Celebration Isle","24,40",Medium,Pending,N/A,N/A,Sea travel and mystical islands
+Urban Adventures,Top-down,64x64,Urban Concrete,Cobblestone,"Metropolis, Groove Glades, City of Dreams","24,26",Medium,Pending,N/A,N/A,City exploration - skyscrapers and neon
+Labyrinth Dungeon,Sidescroller,128x32,Stone Platform,Dirt to Stone,The Labyrinth,34,High,Pending,N/A,N/A,Ancient stone maze - deadly trials
+Mountain Climb,Sidescroller,128x64,Rock to Ice,Wooden Snow Platform,"Mountain Ascent, Fimbul Peaks",35,High,Pending,N/A,N/A,Ascending to frozen peaks
+Cyber Realm,Sidescroller,128x48,Digital Glitch,N/A,"Trivia Terrain, Algorithmic Abyss",38C,Medium,Pending,N/A,N/A,Digital dimension - fractal platforms
+Cosmic Library,Sidescroller,96x48,Crystal Library,N/A,Library of Light,61,Low,Pending,N/A,N/A,Ancient knowledge repository
+Foothills Transition,Sidescroller,96x32,Hill Grass,Sand to Rock,Foothills,41,Low,Pending,N/A,N/A,Desert to forest transition
+River Path,Top-down,48x32,River Water,Grass Plains,River Route,35,Low,Pending,N/A,N/A,Following the river to new lands
+Barren Valley,Top-down,48x48,Dirt to Stone,Sand to Rock,"Barren Valley, The Labyrinth",34,Medium,Pending,N/A,N/A,Desolate valley with ancient structure
+Cosmic Void,Sidescroller,128x64,Starfield Void,N/A,Cosmic Void,Various,Low,Pending,N/A,N/A,Final cosmic journey - reality bending
+Complete World Map,Top-down,256x256,Multiple,Multiple,All Locations,All,Low,Pending,N/A,N/A,Full Adventure Realm overview - interconnected world
+

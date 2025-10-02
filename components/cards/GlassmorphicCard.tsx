@@ -34,3 +34,4 @@ export function GlassmorphicCard({ children, bobImage, className = "" }: Glassmo
     </motion.div>
   );
 }
+

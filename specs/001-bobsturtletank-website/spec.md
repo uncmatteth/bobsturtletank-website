@@ -445,3 +445,4 @@ CREATE TABLE user_progress (
 - [ ] Lighthouse scores meet targets
 - [ ] Deploys to Vercel without errors
 - [ ] Domain connects properly with SSL
+

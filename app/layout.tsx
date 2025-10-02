@@ -4,6 +4,8 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StreamSidebar } from "@/components/layout/StreamSidebar";
+import { TankBubbles } from "@/components/tank/TankBubbles";
+import { SwimmingBob } from "@/components/tank/SwimmingBob";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -18,11 +20,11 @@ const cinzel = Cinzel({
 
 export const metadata: Metadata = {
   title: {
-    default: "Bob's Turtle Tank | Adventure Realm Games & Stories",
-    template: "%s | Bob's Turtle Tank",
+    default: "Bob's Turtle Tank 🐢 | 69 Epic Adventure Chapters",
+    template: "%s | Bob's Tank",
   },
-  description: "Explore Bob the Magical Talking Turtle's Adventure Realm - Play games, read epic fantasy chapters, discover characters, and test your knowledge with trivia!",
-  keywords: ["Bob the Turtle", "fantasy adventure", "browser games", "interactive fiction", "Uncle Matt", "turtle tank", "roguelike", "trivia game"],
+  description: "🐢 Dive into Bob the Magical Talking Turtle's underwater world! 69 epic chapters, arcade games, treasure hunts, and more. Looking into Bob's actual tank has never been this fun!",
+  keywords: ["Bob the Turtle", "turtle tank", "fantasy adventure", "browser games", "interactive fiction", "Uncle Matt", "underwater adventure", "roguelike", "trivia game", "aquarium"],
   authors: [{ name: "Uncle Matt" }],
   creator: "Uncle Matt",
   icons: {
@@ -33,14 +35,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://bobsturtletank.fun",
-    title: "Bob's Turtle Tank | Adventure Realm",
-    description: "Play games, read epic adventures, and explore the magical world of Bob the Turtle",
+    title: "Bob's Turtle Tank 🐢 | Dive Into Adventure",
+    description: "Look into Bob's tank! 69 epic chapters, underwater arcade, and magical treasures await!",
     siteName: "Bob's Turtle Tank",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bob's Turtle Tank | Adventure Realm",
-    description: "Play games, read epic adventures, and explore the magical world of Bob the Turtle",
+    title: "Bob's Turtle Tank 🐢 | Adventure Awaits",
+    description: "Dive into Bob's underwater world - 69 chapters, games, and treasures!",
   },
   robots: {
     index: true,
@@ -56,6 +58,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${cinzel.variable} font-sans antialiased`}>
+        {/* Tank Environment Effects */}
+        <TankBubbles />
+        <SwimmingBob />
+        
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-1">{children}</main>

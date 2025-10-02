@@ -77,3 +77,4 @@ export function BobGallery({ limit, columns = 4 }: BobGalleryProps) {
     </>
   );
 }
+
