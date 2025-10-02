@@ -9,10 +9,10 @@ export const metadata = {
 
 export default function MagicPage() {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-12 min-h-screen underwater-background">
       <div className="text-center mb-12">
         <Sparkles className="h-16 w-16 mx-auto mb-4 text-purple-600" />
-        <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4">
+        <h1 className="font-serif text-4xl md:text-5xl font-bold tank-title mb-4">
           Magic Systems & Artifact Synergy
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -221,4 +221,5 @@ export default function MagicPage() {
     </div>
   );
 }
+
 
