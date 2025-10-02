@@ -40,15 +40,24 @@ export default function CharactersPage() {
   }, [allCharacters, searchQuery, activeFilter]);
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="mb-8">
-        <div className="flex items-center gap-3 mb-4">
-          <Users className="h-8 w-8 text-turtle-green-600" />
-          <h1 className="font-serif text-4xl font-bold">Characters</h1>
+    <div className="container mx-auto px-4 py-12 min-h-screen underwater-background">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <div className="inline-block mb-4 text-sm text-purple-600 dark:text-purple-300 font-medium tracking-wide">
+          👥 TANK RESIDENTS DATABASE 🐠
         </div>
-        <p className="text-lg text-muted-foreground">
-          Discover {allCharacters.length} characters from Bob's Adventure Realm
+        <h1 className="font-serif text-4xl md:text-5xl font-bold tank-title mb-4">
+          Meet the Characters
+        </h1>
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
+          Explore all <strong className="text-purple-600">{allCharacters.length}+ characters</strong> who appear in Bob's adventure!
+          From heroes to villains, allies to cosmic beings - they're all here in the tank!
         </p>
+        <div className="inline-block px-6 py-3 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 rounded-lg border-2 border-purple-300 dark:border-purple-700">
+          <div className="text-sm text-muted-foreground">
+            🎤 Each character has a <strong className="text-purple-600">celebrity AI voice</strong> in the audiobook!
+          </div>
+        </div>
       </div>
 
       <div className="mb-8">
@@ -82,3 +91,4 @@ export default function CharactersPage() {
     </div>
   );
 }
+

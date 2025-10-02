@@ -10,31 +10,41 @@ interface CharacterCardProps {
 export function CharacterCard({ character }: CharacterCardProps) {
   const slug = character.name.toLowerCase().replace(/\s+/g, '-');
   
+  const categoryColors = {
+    'Main': 'text-blue-600 bg-blue-50 dark:bg-blue-950',
+    'Allies': 'text-green-600 bg-green-50 dark:bg-green-950',
+    'Antagonists': 'text-red-600 bg-red-50 dark:bg-red-950',
+    'Minor': 'text-gray-600 bg-gray-50 dark:bg-gray-950',
+  };
+  
+  const categoryColor = categoryColors[character.subcategory as keyof typeof categoryColors] || 'text-purple-600';
+
   return (
     <Link href={`/book/characters/${slug}`}>
-      <Card className="h-full hover:shadow-lg transition-shadow">
-        <CardHeader>
-          <div className="flex items-start justify-between gap-2">
-            <CardTitle className="text-lg">{character.name}</CardTitle>
-            <Badge variant="outline" className="text-xs">
-              Ch. {character.firstAppearance}
+      <div className="underwater-card h-full hover:scale-105 transition-transform p-6">
+        <div className="flex items-start justify-between gap-2 mb-3">
+          <h3 className="font-bold text-xl">{character.name}</h3>
+          <Badge variant="outline" className="text-xs bg-blue-100 dark:bg-blue-900">
+            Ch. {character.firstAppearance}
+          </Badge>
+        </div>
+        <div className="mb-3">
+          <Badge className={`text-xs capitalize ${categoryColor}`}>
+            {character.subcategory}
+          </Badge>
+        </div>
+        <p className="text-sm text-muted-foreground line-clamp-3 mb-3">
+          {character.description}
+        </p>
+        {character.status && (
+          <div className="mt-3 flex items-center gap-2">
+            <Badge variant="secondary" className="text-xs">
+              {character.status}
             </Badge>
           </div>
-          <CardDescription className="capitalize">{character.subcategory}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground line-clamp-3">
-            {character.description}
-          </p>
-          {character.status && (
-            <div className="mt-3 flex items-center gap-2">
-              <Badge variant="secondary" className="text-xs">
-                {character.status}
-              </Badge>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        )}
+      </div>
     </Link>
   );
 }
+
