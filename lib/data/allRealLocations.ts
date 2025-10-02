@@ -51,7 +51,7 @@ export function getAllRealLocations(): RealLocation[] {
   });
 
   // Sort by first appearance
-  locations.sort((a, b) => a.first_chapter - b.first_chapter);
+  locations.sort((a: RealLocation, b: RealLocation) => a.first_chapter - b.first_chapter);
   
   cachedLocations = locations;
   return cachedLocations;
