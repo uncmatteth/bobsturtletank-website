@@ -27,3 +27,4 @@ Replace `YOUR_USERNAME` with your GitHub username!
 5. Update DNS records on Namecheap
 
 Done! 🚀
+
