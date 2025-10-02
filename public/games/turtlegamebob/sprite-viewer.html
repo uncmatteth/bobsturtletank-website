@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐢 Bob's Master Sprite Library - BrowserQuest Assets</title>
+    <title>🐢 Bob's Master Sprite Library - 1300+ Sprites</title>
     <style>
         * {
             margin: 0;
@@ -72,29 +72,58 @@
             text-transform: uppercase;
         }
         
-        .section {
-            margin-bottom: 50px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid rgba(0, 212, 255, 0.3);
-        }
-        
-        .section-title {
-            font-size: 36px;
-            color: #00d4ff;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        .filters {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
         }
         
-        .section-desc {
-            color: #aaa;
-            margin-bottom: 25px;
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(0, 212, 255, 0.2);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 8px;
+            color: #00d4ff;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
             font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background: rgba(0, 212, 255, 0.4);
+            border-color: #00d4ff;
+        }
+        
+        .filter-btn.active {
+            background: rgba(0, 212, 255, 0.6);
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(0, 212, 255, 0.5);
+            border-radius: 10px;
+            color: #eee;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
         }
         
         .sprite-grid {
@@ -141,10 +170,10 @@
         }
         
         .sprite-name {
-            font-size: 11px;
+            font-size: 10px;
             color: #00d4ff;
             word-break: break-word;
-            min-height: 32px;
+            min-height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -211,7 +240,7 @@
             right: 0;
             text-align: center;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
         }
         
         .loading {
@@ -220,35 +249,63 @@
             padding: 50px;
             color: #00d4ff;
         }
+        
+        .result-count {
+            text-align: center;
+            color: #00d4ff;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🐢 Bob's Master Sprite Library</h1>
-        <p class="subtitle">BrowserQuest Reskin Assets - 888 Sprites Ready for Roguelike!</p>
+        <p class="subtitle">Consolidated from 5 Bob/Turtle projects: BrowserQuest, SuperBobWorld, BobDungeon, TurtleBook & More!</p>
     </div>
 
-    <div class="stats" id="stats">
+    <div class="stats">
         <div class="stat-box">
-            <div class="stat-number">888</div>
+            <div class="stat-number" id="total-count">1300</div>
             <div class="stat-label">Total Sprites</div>
         </div>
         <div class="stat-box">
             <div class="stat-number" id="player-count">0</div>
-            <div class="stat-label">Bob Sprites</div>
+            <div class="stat-label">Player Sprites</div>
         </div>
         <div class="stat-box">
             <div class="stat-number" id="enemy-count">0</div>
-            <div class="stat-label">Enemies</div>
+            <div class="stat-label">Enemy Sprites</div>
         </div>
         <div class="stat-box">
             <div class="stat-number" id="item-count">0</div>
-            <div class="stat-label">Items</div>
+            <div class="stat-label">Item Sprites</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="level-count">0</div>
+            <div class="stat-label">Level/Tileset</div>
         </div>
     </div>
 
-    <div id="content">
-        <div class="loading">🐢 Loading BrowserQuest sprites...</div>
+    <div class="search-box">
+        <input type="text" id="search" placeholder="🔍 Search sprites by name or path...">
+    </div>
+
+    <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All (1300)</button>
+        <button class="filter-btn" data-filter="player">🐢 Player/Bob</button>
+        <button class="filter-btn" data-filter="enemies">👹 Enemies</button>
+        <button class="filter-btn" data-filter="items">💎 Items</button>
+        <button class="filter-btn" data-filter="level">🏰 Level/Tiles</button>
+        <button class="filter-btn" data-filter="effects">✨ Effects</button>
+        <button class="filter-btn" data-filter="ui">🎮 UI</button>
+        <button class="filter-btn" data-filter="objects">🚤 Objects</button>
+    </div>
+
+    <div class="result-count" id="result-count"></div>
+
+    <div class="sprite-grid" id="sprite-grid">
+        <div class="loading">🐢 Loading master sprite library...</div>
     </div>
 
     <div class="modal" id="modal">
@@ -260,206 +317,97 @@
     </div>
 
     <script>
-        const spriteCategories = {
-            'Bob Player Sprites': {
-                icon: '🐢',
-                desc: 'All Bob turtle player animations - idle, walk, attack, jump, etc.',
-                paths: [
-                    'browserquest-assets/player/bob_idle',
-                    'browserquest-assets/player/bob_walk_down',
-                    'browserquest-assets/player/bob_walk_left',
-                    'browserquest-assets/player/bob_walk_right',
-                    'browserquest-assets/player/bob_walk_up',
-                    'browserquest-assets/player/bob_atk_down',
-                    'browserquest-assets/player/bob_atk_left',
-                    'browserquest-assets/player/bob_atk_right',
-                    'browserquest-assets/player/bob_atk_up',
-                    'browserquest-assets/player/bob_run',
-                    'browserquest-assets/player/bob_jump',
-                    'browserquest-assets/player/bob_fall',
-                    'browserquest-assets/player/bob_hit',
-                    'browserquest-assets/player/bob_attack',
-                    'browserquest-assets/player/bob_air_attack',
-                    'browserquest-assets/player/bob_base',
-                    'browserquest-assets/player/bob_idle_down',
-                    'browserquest-assets/player/bob_idle_left',
-                    'browserquest-assets/player/bob_idle_right',
-                    'browserquest-assets/player/bob_idle_up',
-                    'browserquest-assets/player/bob_wall'
-                ]
-            },
-            'Enemies & Bosses': {
-                icon: '👹',
-                desc: 'All enemy sprites - griffins, elven guardians, zoxoleon, etc.',
-                paths: [
-                    'browserquest-assets/enemies'
-                ]
-            },
-            'Items & Collectibles': {
-                icon: '💎',
-                desc: 'Potions, diamonds, gold, silver, skulls',
-                paths: [
-                    'browserquest-assets/items'
-                ]
-            },
-            'Level & Environment': {
-                icon: '🏰',
-                desc: 'Tiles, backgrounds, decorations, water, clouds',
-                paths: [
-                    'browserquest-assets/level'
-                ]
-            },
-            'Effects & Particles': {
-                icon: '✨',
-                desc: 'Water effects, particles, visual effects',
-                paths: [
-                    'browserquest-assets/effects'
-                ]
-            },
-            'UI Elements': {
-                icon: '🎮',
-                desc: 'Hearts, UI elements, interface components',
-                paths: [
-                    'browserquest-assets/ui'
-                ]
-            },
-            'Objects': {
-                icon: '🚤',
-                desc: 'Boats, items, interactive objects',
-                paths: [
-                    'browserquest-assets/objects'
-                ]
-            },
-            'Map Elements': {
-                icon: '🗺️',
-                desc: 'Map icons, overworld elements',
-                paths: [
-                    'browserquest-assets/map',
-                    'browserquest-assets/overworld'
-                ]
-            }
-        };
-
         let allSprites = [];
+        let currentFilter = 'all';
+        let searchQuery = '';
 
+        // Load sprite index
         async function loadSprites() {
-            const content = document.getElementById('content');
-            content.innerHTML = '';
-
-            let playerCount = 0;
-            let enemyCount = 0;
-            let itemCount = 0;
-
-            for (const [category, info] of Object.entries(spriteCategories)) {
-                const section = document.createElement('div');
-                section.className = 'section';
+            try {
+                const response = await fetch('master-sprites/sprite-index.txt');
+                const text = await response.text();
+                const paths = text.split('\n').filter(line => line.trim() && line.endsWith('.png'));
                 
-                const title = document.createElement('h2');
-                title.className = 'section-title';
-                title.innerHTML = `${info.icon} ${category}`;
-                section.appendChild(title);
+                allSprites = paths.map(path => ({
+                    path: `master-sprites/${path}`,
+                    name: path.split('/').pop(),
+                    category: categorizePath(path),
+                    fullPath: path
+                }));
 
-                const desc = document.createElement('div');
-                desc.className = 'section-desc';
-                desc.textContent = info.desc;
-                section.appendChild(desc);
+                updateStats();
+                renderSprites();
+            } catch (error) {
+                document.getElementById('sprite-grid').innerHTML = `
+                    <div class="loading">❌ Error loading sprites: ${error.message}</div>
+                `;
+            }
+        }
 
-                const grid = document.createElement('div');
-                grid.className = 'sprite-grid';
+        function categorizePath(path) {
+            const lower = path.toLowerCase();
+            if (lower.includes('player') || lower.includes('bob_') || lower.includes('turtle')) return 'player';
+            if (lower.includes('enemies') || lower.includes('enemy')) return 'enemies';
+            if (lower.includes('items') || lower.includes('item')) return 'items';
+            if (lower.includes('level') || lower.includes('tileset')) return 'level';
+            if (lower.includes('effects') || lower.includes('particle')) return 'effects';
+            if (lower.includes('ui')) return 'ui';
+            if (lower.includes('objects')) return 'objects';
+            return 'other';
+        }
 
-                // For each path in this category
-                for (const basePath of info.paths) {
-                    const sprites = await findSpritesInPath(basePath);
-                    sprites.forEach(spritePath => {
-                        const card = createSpriteCard(spritePath, category);
-                        grid.appendChild(card);
-                        allSprites.push({ path: spritePath, category });
+        function updateStats() {
+            document.getElementById('total-count').textContent = allSprites.length;
+            document.getElementById('player-count').textContent = allSprites.filter(s => s.category === 'player').length;
+            document.getElementById('enemy-count').textContent = allSprites.filter(s => s.category === 'enemies').length;
+            document.getElementById('item-count').textContent = allSprites.filter(s => s.category === 'items').length;
+            document.getElementById('level-count').textContent = allSprites.filter(s => s.category === 'level').length;
+        }
 
-                        // Count sprites
-                        if (category.includes('Bob')) playerCount++;
-                        else if (category.includes('Enemies')) enemyCount++;
-                        else if (category.includes('Items')) itemCount++;
-                    });
-                }
+        function renderSprites() {
+            let filtered = allSprites;
 
-                if (grid.children.length > 0) {
-                    section.appendChild(grid);
-                    content.appendChild(section);
-                }
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(s => s.category === currentFilter);
             }
 
-            // Update counts
-            document.getElementById('player-count').textContent = playerCount;
-            document.getElementById('enemy-count').textContent = enemyCount;
-            document.getElementById('item-count').textContent = itemCount;
-        }
-
-        async function findSpritesInPath(basePath) {
-            // For directories, we need to enumerate possible files
-            // Since we can't list directories in browser, we'll try common patterns
-            const sprites = [];
-            const maxFrames = 20; // Try up to 20 frames
-
-            // Try numbered frames (0.png, 1.png, etc.)
-            for (let i = 0; i < maxFrames; i++) {
-                const path = `${basePath}/${i}.png`;
-                if (await checkImageExists(path)) {
-                    sprites.push(path);
-                }
+            // Apply search filter
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                filtered = filtered.filter(s => 
+                    s.name.toLowerCase().includes(query) || 
+                    s.fullPath.toLowerCase().includes(query)
+                );
             }
 
-            // If no numbered frames, try the path itself as an image
-            if (sprites.length === 0) {
-                if (await checkImageExists(`${basePath}.png`)) {
-                    sprites.push(`${basePath}.png`);
-                }
+            // Update result count
+            document.getElementById('result-count').textContent = 
+                `Showing ${filtered.length} of ${allSprites.length} sprites`;
+
+            // Render grid
+            const grid = document.getElementById('sprite-grid');
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="loading">No sprites found matching your criteria</div>';
+                return;
             }
 
-            return sprites;
+            grid.innerHTML = filtered.map(sprite => `
+                <div class="sprite-card" onclick="openModal('${sprite.path}', '${sprite.fullPath}')">
+                    <div class="sprite-preview">
+                        <img src="${sprite.path}" alt="${sprite.name}" loading="lazy">
+                    </div>
+                    <div class="sprite-name">${sprite.name}</div>
+                </div>
+            `).join('');
         }
 
-        function createSpriteCard(path, category) {
-            const card = document.createElement('div');
-            card.className = 'sprite-card';
-            card.onclick = () => openModal(path);
-
-            const preview = document.createElement('div');
-            preview.className = 'sprite-preview';
-
-            const img = document.createElement('img');
-            img.src = path;
-            img.alt = path.split('/').pop();
-            img.onerror = () => {
-                preview.innerHTML = '<div style="color: #ff6b6b; font-size: 10px;">Not found</div>';
-            };
-
-            preview.appendChild(img);
-            card.appendChild(preview);
-
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'sprite-name';
-            const fileName = path.split('/').slice(-2).join('/');
-            nameDiv.textContent = fileName;
-            card.appendChild(nameDiv);
-
-            return card;
-        }
-
-        function checkImageExists(url) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
-                img.src = url;
-            });
-        }
-
-        function openModal(imgPath) {
+        function openModal(imgPath, fullPath) {
             const modal = document.getElementById('modal');
             const modalImg = document.getElementById('modal-img');
             const modalInfo = document.getElementById('modal-info');
             modalImg.src = imgPath;
-            modalInfo.textContent = imgPath;
+            modalInfo.textContent = fullPath;
             modal.classList.add('active');
         }
 
@@ -467,21 +415,32 @@
             document.getElementById('modal').classList.remove('active');
         }
 
-        // Close modal on click outside
+        // Filter buttons
+        document.getElementById('filters').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                renderSprites();
+            }
+        });
+
+        // Search input
+        document.getElementById('search').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderSprites();
+        });
+
+        // Close modal on click outside or ESC
         document.getElementById('modal').addEventListener('click', (e) => {
-            if (e.target.id === 'modal') {
-                closeModal();
-            }
+            if (e.target.id === 'modal') closeModal();
         });
 
-        // Close modal on ESC key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+            if (e.key === 'Escape') closeModal();
         });
 
-        // Load sprites on page load
+        // Load on page load
         window.addEventListener('load', loadSprites);
     </script>
 </body>
