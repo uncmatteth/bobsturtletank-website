@@ -4,11 +4,19 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 export function SwimmingBob() {
+  const [mounted, setMounted] = useState(false);
   const [position, setPosition] = useState({ x: 10, y: 20 });
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   const [isSwimming, setIsSwimming] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const swimInterval = setInterval(() => {
       // Randomly decide to swim
       if (Math.random() > 0.7) {
@@ -30,7 +38,25 @@ export function SwimmingBob() {
     }, 5000); // Check every 5 seconds
 
     return () => clearInterval(swimInterval);
-  }, [position]);
+  }, [position, mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+
+    const bubbleInterval = setInterval(() => {
+      if (!isSwimming && Math.random() > 0.8) {
+        setShowBubble(true);
+        setTimeout(() => setShowBubble(false), 4000);
+      }
+    }, 6000);
+
+    return () => clearInterval(bubbleInterval);
+  }, [isSwimming, mounted]);
+
+  // Don't render until mounted to avoid hydration mismatch
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div
@@ -53,7 +79,7 @@ export function SwimmingBob() {
         </div>
         
         {/* Occasional speech bubble */}
-        {!isSwimming && Math.random() > 0.8 && (
+        {showBubble && (
           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
             <div className="bubble-text text-xs md:text-sm">
               {getRandomBobQuote()}
