@@ -3,60 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐢 Bob's Roguelike - Asset Review</title>
-    <script>
-        // Redirect to sprite viewer for asset review
-        window.location.href = 'sprite-viewer.html';
-    </script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: #1a1a2e;
-            color: white;
-            font-family: 'Courier New', monospace;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            text-align: center;
-        }
-        .container {
-            padding: 40px;
-        }
-        h1 {
-            font-size: 48px;
-            color: #00d4ff;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 18px;
-            color: #aaa;
-            margin-bottom: 30px;
-        }
-        a {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #00d4ff;
-            color: #1a1a2e;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        a:hover {
-            background: #00b4d8;
-            transform: scale(1.05);
-        }
-    </style>
+    <title>🐢 Bob's Roguelike</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico">
 </head>
 <body>
-    <div class="container">
-        <h1>🐢 Bob's Roguelike</h1>
-        <p>Starting fresh! Reviewing assets...</p>
-        <p>If not redirected automatically:</p>
-        <a href="sprite-viewer.html">View Sprite Assets →</a>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="loading">
+            <h1>🐢 Loading Bob's Roguelike...</h1>
+            <div class="spinner"></div>
+        </div>
     </div>
+
+    <!-- Core game modules -->
+    <script src="js/utils.js"></script>
+    <script src="js/sprites.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/enemy.js"></script>
+    <script src="js/dungeon.js"></script>
+    <script src="js/combat.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
 </body>
 </html>
-
