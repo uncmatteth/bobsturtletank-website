@@ -1,15 +1,16 @@
 // ============================================================================
 // DUNGEON GENERATION & COLLISION
-// Procedural generation, tiles, collision
+// Procedural generation with multiple rooms and corridors
 // ============================================================================
 
 const Dungeon = {
-    width: 60,
-    height: 60,
+    width: 80,
+    height: 80,
     tileSize: 32,
     tiles: [],
     rooms: [],
     currentFloor: 1,
+    stairsPos: null,
     
     // Tile types
     WALL: 0,
@@ -22,6 +23,7 @@ const Dungeon = {
         this.currentFloor = floor;
         this.tiles = [];
         this.rooms = [];
+        this.stairsPos = null;
         
         // Initialize with walls
         for (let y = 0; y < this.height; y++) {
@@ -31,53 +33,151 @@ const Dungeon = {
             }
         }
         
-        // Generate simple test room for now
-        // TODO: Implement proper procedural generation
-        this.generateSimpleRoom();
+        // Generate rooms
+        const roomCount = 5 + Math.floor(floor / 2); // More rooms on higher floors
+        this.generateRooms(roomCount);
         
-        // Spawn enemies
+        // Connect rooms with corridors
+        this.connectRooms();
+        
+        // Place stairs in last room
+        const lastRoom = this.rooms[this.rooms.length - 1];
+        const stairsX = lastRoom.x + Math.floor(lastRoom.width / 2);
+        const stairsY = lastRoom.y + Math.floor(lastRoom.height / 2);
+        this.tiles[stairsY][stairsX] = this.STAIRS_DOWN;
+        this.stairsPos = { x: stairsX, y: stairsY };
+        
+        // Spawn enemies (not in first room)
         this.spawnEnemies(floor);
         
-        console.log(`✅ Floor ${floor} generated`);
+        console.log(`✅ Floor ${floor} generated: ${this.rooms.length} rooms`);
     },
     
-    generateSimpleRoom() {
-        // Create a simple 30x30 room in center
-        const roomX = 15;
-        const roomY = 15;
-        const roomW = 30;
-        const roomH = 30;
+    generateRooms(count) {
+        const minSize = 8;
+        const maxSize = 15;
+        const padding = 3;
         
-        for (let y = roomY; y < roomY + roomH; y++) {
-            for (let x = roomX; x < roomX + roomW; x++) {
+        for (let i = 0; i < count; i++) {
+            let attempts = 0;
+            let placed = false;
+            
+            while (!placed && attempts < 50) {
+                attempts++;
+                
+                // Random room size
+                const width = randomInt(minSize, maxSize);
+                const height = randomInt(minSize, maxSize);
+                
+                // Random position
+                const x = randomInt(padding, this.width - width - padding);
+                const y = randomInt(padding, this.height - height - padding);
+                
+                // Check if overlaps with existing rooms
+                let overlaps = false;
+                for (const room of this.rooms) {
+                    if (this.roomsOverlap(
+                        { x, y, width, height },
+                        { x: room.x - padding, y: room.y - padding, width: room.width + padding * 2, height: room.height + padding * 2 }
+                    )) {
+                        overlaps = true;
+                        break;
+                    }
+                }
+                
+                if (!overlaps) {
+                    // Carve out the room
+                    for (let ry = y; ry < y + height; ry++) {
+                        for (let rx = x; rx < x + width; rx++) {
+                            this.tiles[ry][rx] = this.FLOOR;
+                        }
+                    }
+                    
+                    this.rooms.push({ x, y, width, height, center: { x: x + Math.floor(width / 2), y: y + Math.floor(height / 2) } });
+                    placed = true;
+                }
+            }
+        }
+    },
+    
+    roomsOverlap(r1, r2) {
+        return !(r1.x + r1.width < r2.x || r1.x > r2.x + r2.width ||
+                 r1.y + r1.height < r2.y || r1.y > r2.y + r2.height);
+    },
+    
+    connectRooms() {
+        // Connect each room to the next with L-shaped corridor
+        for (let i = 0; i < this.rooms.length - 1; i++) {
+            const roomA = this.rooms[i];
+            const roomB = this.rooms[i + 1];
+            
+            // Random L-corridor (horizontal then vertical, or vertical then horizontal)
+            if (Math.random() > 0.5) {
+                // Horizontal first
+                this.carveHorizontalCorridor(roomA.center.x, roomB.center.x, roomA.center.y);
+                this.carveVerticalCorridor(roomA.center.y, roomB.center.y, roomB.center.x);
+            } else {
+                // Vertical first
+                this.carveVerticalCorridor(roomA.center.y, roomB.center.y, roomA.center.x);
+                this.carveHorizontalCorridor(roomA.center.x, roomB.center.x, roomB.center.y);
+            }
+        }
+    },
+    
+    carveHorizontalCorridor(x1, x2, y) {
+        const startX = Math.min(x1, x2);
+        const endX = Math.max(x1, x2);
+        
+        for (let x = startX; x <= endX; x++) {
+            if (y >= 0 && y < this.height && x >= 0 && x < this.width) {
                 this.tiles[y][x] = this.FLOOR;
             }
         }
+    },
+    
+    carveVerticalCorridor(y1, y2, x) {
+        const startY = Math.min(y1, y2);
+        const endY = Math.max(y1, y2);
         
-        this.rooms.push({ x: roomX, y: roomY, width: roomW, height: roomH });
-        
-        // Place stairs
-        this.tiles[roomY + roomH - 2][roomX + Math.floor(roomW / 2)] = this.STAIRS_DOWN;
+        for (let y = startY; y <= endY; y++) {
+            if (y >= 0 && y < this.height && x >= 0 && x < this.width) {
+                this.tiles[y][x] = this.FLOOR;
+            }
+        }
     },
     
     spawnEnemies(floor) {
         Enemy.clear();
         
-        // Spawn enemies in rooms (except first room)
-        const enemyCount = 3 + floor;
-        for (let i = 0; i < enemyCount; i++) {
-            const room = this.rooms[0]; // For now, just use first room
-            if (room) {
+        // Spawn enemies in rooms (skip first room where player starts)
+        const enemyRooms = this.rooms.slice(1); // Skip first room
+        const enemiesPerRoom = 1 + Math.floor(floor / 2); // More enemies on higher floors
+        
+        for (const room of enemyRooms) {
+            const count = randomInt(enemiesPerRoom, enemiesPerRoom + 2);
+            
+            for (let i = 0; i < count; i++) {
+                // Random position in room
                 const x = (room.x + randomInt(2, room.width - 2)) * this.tileSize;
                 const y = (room.y + randomInt(2, room.height - 2)) * this.tileSize;
                 
-                // Random enemy type
-                const types = ['goblin', 'goblin', 'skeleton', 'orc'];
-                const type = randomChoice(types);
+                // Random enemy type (more variety on higher floors)
+                let type;
+                if (floor === 1) {
+                    type = 'goblin'; // Easy floor
+                } else if (floor < 3) {
+                    type = randomChoice(['goblin', 'goblin', 'skeleton']); // Mostly goblins
+                } else if (floor < 5) {
+                    type = randomChoice(['goblin', 'skeleton', 'skeleton']); // More skeletons
+                } else {
+                    type = randomChoice(['goblin', 'skeleton', 'orc']); // All types
+                }
                 
                 Enemy.spawn(type, x, y);
             }
         }
+        
+        console.log(`  Spawned ${Enemy.list.length} enemies`);
     },
     
     getTile(x, y) {
@@ -94,6 +194,15 @@ const Dungeon = {
     canMoveTo(x, y) {
         const tile = this.getTile(x, y);
         return tile !== this.WALL;
+    },
+    
+    isOnStairs(x, y) {
+        if (!this.stairsPos) return false;
+        
+        const tileX = Math.floor(x / this.tileSize);
+        const tileY = Math.floor(y / this.tileSize);
+        
+        return tileX === this.stairsPos.x && tileY === this.stairsPos.y;
     },
     
     render(ctx) {
@@ -114,18 +223,34 @@ const Dungeon = {
                 switch (tile) {
                     case this.WALL:
                         ctx.fillStyle = '#1a1a2e';
+                        ctx.fillRect(screenX, screenY, this.tileSize, this.tileSize);
+                        // Wall edges
+                        ctx.fillStyle = '#0a0a1e';
+                        ctx.fillRect(screenX, screenY, this.tileSize, 2);
+                        ctx.fillRect(screenX, screenY, 2, this.tileSize);
                         break;
                     case this.FLOOR:
                         ctx.fillStyle = '#2a2a3e';
+                        ctx.fillRect(screenX, screenY, this.tileSize, this.tileSize);
+                        // Floor pattern
+                        if ((x + y) % 2 === 0) {
+                            ctx.fillStyle = '#25253a';
+                            ctx.fillRect(screenX, screenY, this.tileSize, this.tileSize);
+                        }
                         break;
                     case this.STAIRS_DOWN:
                         ctx.fillStyle = '#4a4a5e';
+                        ctx.fillRect(screenX, screenY, this.tileSize, this.tileSize);
+                        // Draw stairs symbol
+                        ctx.fillStyle = '#00d4ff';
+                        ctx.font = 'bold 24px monospace';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText('▼', screenX + this.tileSize / 2, screenY + this.tileSize / 2);
                         break;
                 }
                 
-                ctx.fillRect(screenX, screenY, this.tileSize, this.tileSize);
-                
-                // Draw grid (debug)
+                // Debug grid
                 if (Game.debugMode) {
                     ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
                     ctx.strokeRect(screenX, screenY, this.tileSize, this.tileSize);
@@ -134,4 +259,3 @@ const Dungeon = {
         }
     }
 };
-

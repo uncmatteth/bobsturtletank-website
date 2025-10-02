@@ -18,6 +18,11 @@ const Combat = {
             const damage = Player.damage + (Player.equippedWeapon?.damage || 0);
             Enemy.takeDamage(enemy, damage);
             
+            // Visual effects
+            Effects.spawnParticles(enemy.x, enemy.y, 8, '#ff416c');
+            Effects.showDamageNumber(enemy.x, enemy.y, damage, '#ff416c');
+            Effects.screenShakeEffect(5, 0.1);
+            
             // Knockback
             const angle = angleBetween(Player, enemy);
             enemy.x += Math.cos(angle) * 30;
@@ -35,6 +40,11 @@ const Combat = {
         // Calculate damage
         const damage = enemy.damage - Player.defense;
         const actualDamage = Player.takeDamage(damage);
+        
+        // Visual effects
+        Effects.spawnParticles(Player.x, Player.y, 6, '#ef4444');
+        Effects.showDamageNumber(Player.x, Player.y, actualDamage, '#ef4444');
+        Effects.screenShakeEffect(8, 0.2);
         
         // Knockback player
         const angle = angleBetween(enemy, Player);

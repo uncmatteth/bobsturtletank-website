@@ -10,7 +10,7 @@ const Game = {
     fps: 60,
     fpsTimer: 0,
     fpsCounter: 0,
-    debugMode: true,
+    debugMode: false,
     gameState: 'loading', // loading, playing, paused, gameover
     camera: { x: 0, y: 0 },
     
@@ -57,6 +57,9 @@ const Game = {
     
     newGame() {
         console.log('🎮 Starting new game...');
+        
+        // Clear inventory
+        Inventory.clear();
         
         // Generate first floor
         Dungeon.generate(1);
@@ -110,6 +113,12 @@ const Game = {
         // Update enemies
         Enemy.update(dt);
         
+        // Check item pickups
+        Inventory.checkPickups();
+        
+        // Update effects
+        Effects.update(dt);
+        
         // Update camera (follow player)
         this.updateCamera();
     },
@@ -118,6 +127,18 @@ const Game = {
         // Attack
         if (Input.isAttackPressed()) {
             Player.attack();
+        }
+        
+        // Interact (go down stairs)
+        if (Input.isInteractPressed() && !Player.isDead) {
+            if (Dungeon.isOnStairs(Player.x, Player.y)) {
+                this.nextFloor();
+            }
+        }
+        
+        // Inventory
+        if (Input.isInventoryPressed() && !Player.isDead) {
+            UI.toggleInventory();
         }
         
         // Restart (when dead)
@@ -129,6 +150,25 @@ const Game = {
         if (Input.isKeyDown('`')) {
             this.debugMode = !this.debugMode;
         }
+    },
+    
+    nextFloor() {
+        console.log(`⬇️ Descending to floor ${Dungeon.currentFloor + 1}...`);
+        
+        // Generate next floor
+        Dungeon.generate(Dungeon.currentFloor + 1);
+        
+        // Place player in first room
+        const startRoom = Dungeon.rooms[0];
+        if (startRoom) {
+            const startX = (startRoom.x + startRoom.width / 2) * Dungeon.tileSize;
+            const startY = (startRoom.y + startRoom.height / 2) * Dungeon.tileSize;
+            Player.x = startX;
+            Player.y = startY;
+        }
+        
+        // Heal player a bit
+        Player.heal(20);
     },
     
     updateCamera() {
@@ -151,13 +191,18 @@ const Game = {
         // Save context state
         this.ctx.save();
         
-        // Apply camera transform
-        this.ctx.translate(-this.camera.x, -this.camera.y);
+        // Apply camera transform (with screen shake)
+        this.ctx.translate(
+            -this.camera.x + Effects.screenShake.x, 
+            -this.camera.y + Effects.screenShake.y
+        );
         
         // Render world (with camera offset)
         Dungeon.render(this.ctx);
+        Inventory.render(this.ctx); // Items on ground
         Enemy.render(this.ctx);
         Player.render(this.ctx);
+        Effects.render(this.ctx); // Particles and damage numbers
         
         // Restore context state
         this.ctx.restore();

@@ -159,7 +159,12 @@ const Enemy = {
         
         if (enemy.health <= 0) {
             console.log(`Enemy ${enemy.type} killed!`);
-            // TODO: Drop loot
+            
+            // Drop loot (30% chance)
+            if (Math.random() < 0.3) {
+                const loot = Inventory.getRandomLoot(Dungeon.currentFloor);
+                Inventory.dropItem(enemy.x, enemy.y, loot);
+            }
         }
     },
     
