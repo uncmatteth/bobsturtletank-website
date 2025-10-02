@@ -25,8 +25,10 @@ const Game = {
         }
         
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = 1280;
-        this.canvas.height = 720;
+        
+        // Set canvas size (responsive for mobile)
+        this.resizeCanvas();
+        window.addEventListener('resize', () => this.resizeCanvas());
         
         console.log(`Canvas: ${this.canvas.width}x${this.canvas.height}`);
         
@@ -172,6 +174,23 @@ const Game = {
     gameOver() {
         this.gameState = 'gameover';
         console.log('💀 GAME OVER');
+    },
+    
+    resizeCanvas() {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            // Full screen on mobile
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+        } else {
+            // Desktop size
+            this.canvas.width = 1280;
+            this.canvas.height = 720;
+        }
+        
+        // Disable image smoothing for pixel art
+        this.ctx.imageSmoothingEnabled = false;
     }
 };
 

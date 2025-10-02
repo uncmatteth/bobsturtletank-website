@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>🐢 Bob's Roguelike</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="favicon.ico">
@@ -14,8 +16,52 @@
             <h1>🐢 Loading Bob's Roguelike...</h1>
             <div class="spinner"></div>
         </div>
+        
+        <!-- Mobile Controls -->
+        <div id="mobile-controls" style="display: none;">
+            <!-- Virtual Joystick Container (left side) -->
+            <div id="joystick-zone"></div>
+            
+            <!-- Attack Button (right side) -->
+            <button id="attack-btn" class="mobile-btn">
+                <span>⚔️</span>
+                <span>ATTACK</span>
+            </button>
+            
+            <!-- Settings Button -->
+            <button id="settings-btn" class="mobile-btn-small">⚙️</button>
+        </div>
+        
+        <!-- Control Settings Modal -->
+        <div id="settings-modal" style="display: none;">
+            <div class="modal-content">
+                <h2>🎮 Control Settings</h2>
+                <div class="control-option">
+                    <label>
+                        <input type="radio" name="control-mode" value="joystick" checked>
+                        <span>Virtual Joystick</span>
+                    </label>
+                </div>
+                <div class="control-option">
+                    <label>
+                        <input type="radio" name="control-mode" value="tap">
+                        <span>Tap to Move</span>
+                    </label>
+                </div>
+                <div class="control-option">
+                    <label>
+                        <input type="radio" name="control-mode" value="both">
+                        <span>Both (Joystick + Tap)</span>
+                    </label>
+                </div>
+                <button id="close-settings" class="btn-primary">Close</button>
+            </div>
+        </div>
     </div>
 
+    <!-- nipplejs - Virtual Joystick Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.10.1/nipplejs.min.js"></script>
+    
     <!-- Core game modules -->
     <script src="js/utils.js"></script>
     <script src="js/sprites.js"></script>
