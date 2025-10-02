@@ -28,7 +28,7 @@ export function getAllRealLocations(): RealLocation[] {
     skip_empty_lines: true,
   });
 
-  cachedLocations = records.map((record: any) => {
+  const locations = records.map((record: any) => {
     const safeName = record.name
       .toLowerCase()
       .replace(/ /g, '-')
@@ -51,8 +51,9 @@ export function getAllRealLocations(): RealLocation[] {
   });
 
   // Sort by first appearance
-  cachedLocations.sort((a, b) => a.first_chapter - b.first_chapter);
-
+  locations.sort((a, b) => a.first_chapter - b.first_chapter);
+  
+  cachedLocations = locations;
   return cachedLocations;
 }
 
