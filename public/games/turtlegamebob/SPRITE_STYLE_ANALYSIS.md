@@ -247,3 +247,4 @@ create_character(
 
 **TL;DR**: Use BrowserQuest Bob (you already have it, it's the best). If you want custom sprites, install Aseprite and edit them, or use PixelLab with "detailed shading" and "single color black outline" settings.
 
+

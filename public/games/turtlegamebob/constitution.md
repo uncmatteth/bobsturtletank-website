@@ -151,3 +151,4 @@
 
 This constitution guides all decisions for Bob's Roguelike. When in doubt, refer back to these principles.
 
+
